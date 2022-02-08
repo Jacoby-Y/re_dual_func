@@ -1,3 +1,6 @@
+## v0.1.2 [Hot Fix]
+- Made game test-ready
+
 ## v0.1.1 [Hot Fix]
 - Fixed HTML links
 

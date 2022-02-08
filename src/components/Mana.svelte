@@ -123,7 +123,7 @@
 	
 	<div id="gap"></div>
 
-	<button id="prestige"><strong>Prestige : 1e6</strong></button>
+	<button id="prestige">Prestige <b>( Coming Soon )</b></button>
 
 	<div on:click={click} id="click"> <div id="combo" style="height: {combo_perc}%;"></div> </div>
 

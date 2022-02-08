@@ -466,7 +466,7 @@ var app = (function () {
     // export const name = writable(get_or("name", "joey"));
     // name.subscribe((v)=> to_store.name = v);
 
-    let mana = w(1000000);
+    let mana = w(0);
     let mana_click = w({
     	cost: 25,
     	val: 1,
@@ -879,7 +879,7 @@ var app = (function () {
     	let t2;
     	let button0;
     	let t3;
-    	let b;
+    	let b0;
     	let t4_value = sci(/*$per_click*/ ctx[4].cost) + "";
     	let t4;
     	let t5;
@@ -890,22 +890,23 @@ var app = (function () {
     	let div0;
     	let t10;
     	let button1;
-    	let strong;
-    	let t12;
+    	let t11;
+    	let b1;
+    	let t13;
     	let div2;
     	let div1;
-    	let t13;
-    	let h31;
     	let t14;
+    	let h31;
     	let t15;
-    	let t16_value = sci(/*get_per_click*/ ctx[6]) + "";
     	let t16;
+    	let t17_value = sci(/*get_per_click*/ ctx[6]) + "";
     	let t17;
-    	let br;
     	let t18;
-    	let t19_value = sci(/*get_per_sec*/ ctx[7]) + "";
+    	let br;
     	let t19;
+    	let t20_value = sci(/*get_per_sec*/ ctx[7]) + "";
     	let t20;
+    	let t21;
     	let mounted;
     	let dispose;
     	let if_block0 = /*$per_click*/ ctx[4].val > 1 && create_if_block_5(ctx);
@@ -923,7 +924,7 @@ var app = (function () {
     			t2 = space();
     			button0 = element("button");
     			t3 = text("Base Mana/Click +1 ");
-    			b = element("b");
+    			b0 = element("b");
     			t4 = text(t4_value);
     			t5 = text(" Mana");
     			t6 = space();
@@ -936,33 +937,35 @@ var app = (function () {
     			div0 = element("div");
     			t10 = space();
     			button1 = element("button");
-    			strong = element("strong");
-    			strong.textContent = "Prestige : 1e6";
-    			t12 = space();
+    			t11 = text("Prestige ");
+    			b1 = element("b");
+    			b1.textContent = "( Coming Soon )";
+    			t13 = space();
     			div2 = element("div");
     			div1 = element("div");
-    			t13 = space();
+    			t14 = space();
     			h31 = element("h3");
     			if (if_block3) if_block3.c();
-    			t14 = space();
-    			if (if_block4) if_block4.c();
     			t15 = space();
-    			t16 = text(t16_value);
-    			t17 = text(" Mana/Click");
+    			if (if_block4) if_block4.c();
+    			t16 = space();
+    			t17 = text(t17_value);
+    			t18 = text(" Mana/Click");
     			br = element("br");
-    			t18 = space();
-    			t19 = text(t19_value);
-    			t20 = text(" Mana/Sec");
+    			t19 = space();
+    			t20 = text(t20_value);
+    			t21 = text(" Mana/Sec");
     			attr_dev(h30, "id", "mana-txt");
     			attr_dev(h30, "class", "svelte-1ck77v1");
     			add_location(h30, file$2, 111, 1, 2629);
-    			attr_dev(b, "class", "svelte-1ck77v1");
-    			add_location(b, file$2, 112, 53, 2724);
+    			attr_dev(b0, "class", "svelte-1ck77v1");
+    			add_location(b0, file$2, 112, 53, 2724);
     			attr_dev(button0, "class", "svelte-1ck77v1");
     			add_location(button0, file$2, 112, 1, 2672);
     			attr_dev(div0, "id", "gap");
     			add_location(div0, file$2, 123, 1, 3271);
-    			add_location(strong, file$2, 125, 23, 3316);
+    			attr_dev(b1, "class", "svelte-1ck77v1");
+    			add_location(b1, file$2, 125, 32, 3325);
     			attr_dev(button1, "id", "prestige");
     			attr_dev(button1, "class", "svelte-1ck77v1");
     			add_location(button1, file$2, 125, 1, 3294);
@@ -992,9 +995,9 @@ var app = (function () {
     			append_dev(main, t2);
     			append_dev(main, button0);
     			append_dev(button0, t3);
-    			append_dev(button0, b);
-    			append_dev(b, t4);
-    			append_dev(b, t5);
+    			append_dev(button0, b0);
+    			append_dev(b0, t4);
+    			append_dev(b0, t5);
     			append_dev(main, t6);
     			if (if_block0) if_block0.m(main, null);
     			append_dev(main, t7);
@@ -1005,22 +1008,23 @@ var app = (function () {
     			append_dev(main, div0);
     			append_dev(main, t10);
     			append_dev(main, button1);
-    			append_dev(button1, strong);
-    			append_dev(main, t12);
+    			append_dev(button1, t11);
+    			append_dev(button1, b1);
+    			append_dev(main, t13);
     			append_dev(main, div2);
     			append_dev(div2, div1);
-    			append_dev(main, t13);
+    			append_dev(main, t14);
     			append_dev(main, h31);
     			if (if_block3) if_block3.m(h31, null);
-    			append_dev(h31, t14);
-    			if (if_block4) if_block4.m(h31, null);
     			append_dev(h31, t15);
+    			if (if_block4) if_block4.m(h31, null);
     			append_dev(h31, t16);
     			append_dev(h31, t17);
-    			append_dev(h31, br);
     			append_dev(h31, t18);
+    			append_dev(h31, br);
     			append_dev(h31, t19);
     			append_dev(h31, t20);
+    			append_dev(h31, t21);
 
     			if (!mounted) {
     				dispose = [
@@ -1084,7 +1088,7 @@ var app = (function () {
     				} else {
     					if_block3 = create_if_block_1(ctx);
     					if_block3.c();
-    					if_block3.m(h31, t14);
+    					if_block3.m(h31, t15);
     				}
     			} else if (if_block3) {
     				if_block3.d(1);
@@ -1097,15 +1101,15 @@ var app = (function () {
     				} else {
     					if_block4 = create_if_block(ctx);
     					if_block4.c();
-    					if_block4.m(h31, t15);
+    					if_block4.m(h31, t16);
     				}
     			} else if (if_block4) {
     				if_block4.d(1);
     				if_block4 = null;
     			}
 
-    			if (dirty & /*get_per_click*/ 64 && t16_value !== (t16_value = sci(/*get_per_click*/ ctx[6]) + "")) set_data_dev(t16, t16_value);
-    			if (dirty & /*get_per_sec*/ 128 && t19_value !== (t19_value = sci(/*get_per_sec*/ ctx[7]) + "")) set_data_dev(t19, t19_value);
+    			if (dirty & /*get_per_click*/ 64 && t17_value !== (t17_value = sci(/*get_per_click*/ ctx[6]) + "")) set_data_dev(t17, t17_value);
+    			if (dirty & /*get_per_sec*/ 128 && t20_value !== (t20_value = sci(/*get_per_sec*/ ctx[7]) + "")) set_data_dev(t20, t20_value);
 
     			if (dirty & /*main_rows*/ 256) {
     				set_style(main, "grid-template-rows", "repeat(" + /*main_rows*/ ctx[8] + ", max-content) 1fr repeat(1, max-content)");

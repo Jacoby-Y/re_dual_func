@@ -12,7 +12,7 @@ const to_store = {};
 // export const name = writable(get_or("name", "joey"));
 // name.subscribe((v)=> to_store.name = v);
 
-export let mana = w(1000000);
+export let mana = w(0);
 export let mana_click = w({
 	cost: 25,
 	val: 1,
