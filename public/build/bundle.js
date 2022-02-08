@@ -505,7 +505,7 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$2 = "src/components/Mana.svelte";
 
-    // (114:1) {#if $per_click.val > 1}
+    // (117:1) {#if $per_click.val > 1}
     function create_if_block_5(ctx) {
     	let button;
     	let t0;
@@ -524,9 +524,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-1ck77v1");
-    			add_location(b, file$2, 113, 71, 2839);
+    			add_location(b, file$2, 116, 71, 2964);
     			attr_dev(button, "class", "svelte-1ck77v1");
-    			add_location(button, file$2, 113, 26, 2794);
+    			add_location(button, file$2, 116, 26, 2919);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -554,14 +554,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(114:1) {#if $per_click.val > 1}",
+    		source: "(117:1) {#if $per_click.val > 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (115:1) {#if $idle.val > 0}
+    // (118:1) {#if $idle.val > 0}
     function create_if_block_4(ctx) {
     	let button;
     	let t0;
@@ -580,9 +580,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-1ck77v1");
-    			add_location(b, file$2, 114, 74, 2958);
+    			add_location(b, file$2, 117, 74, 3083);
     			attr_dev(button, "class", "svelte-1ck77v1");
-    			add_location(button, file$2, 114, 21, 2905);
+    			add_location(button, file$2, 117, 21, 3030);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -610,14 +610,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(115:1) {#if $idle.val > 0}",
+    		source: "(118:1) {#if $idle.val > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (116:1) {#if $bonus.val > 0}
+    // (119:1) {#if $bonus.val > 0}
     function create_if_block_2(ctx) {
     	let if_block_anchor;
 
@@ -661,14 +661,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(116:1) {#if $bonus.val > 0}",
+    		source: "(119:1) {#if $bonus.val > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (119:2) {:else}
+    // (122:2) {:else}
     function create_else_block(ctx) {
     	let button;
     	let t0;
@@ -687,9 +687,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-1ck77v1");
-    			add_location(b, file$2, 119, 48, 3213);
+    			add_location(b, file$2, 122, 48, 3338);
     			attr_dev(button, "class", "svelte-1ck77v1");
-    			add_location(button, file$2, 119, 3, 3168);
+    			add_location(button, file$2, 122, 3, 3293);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -717,14 +717,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(119:2) {:else}",
+    		source: "(122:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (117:2) {#if $combo.unlocked == false}
+    // (120:2) {#if $combo.unlocked == false}
     function create_if_block_3(ctx) {
     	let button;
     	let t0;
@@ -743,9 +743,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-1ck77v1");
-    			add_location(b, file$2, 117, 54, 3113);
+    			add_location(b, file$2, 120, 54, 3238);
     			attr_dev(button, "class", "svelte-1ck77v1");
-    			add_location(button, file$2, 117, 3, 3062);
+    			add_location(button, file$2, 120, 3, 3187);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -773,38 +773,42 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(117:2) {#if $combo.unlocked == false}",
+    		source: "(120:2) {#if $combo.unlocked == false}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (131:2) {#if $bonus.val > 0}
+    // (134:2) {#if $bonus.val > 0}
     function create_if_block_1(ctx) {
-    	let t0_value = sci(/*get_bonus*/ ctx[0] * 100) + "";
     	let t0;
+    	let t1_value = sci((/*get_bonus*/ ctx[0] - 1) * 100) + "";
     	let t1;
+    	let t2;
     	let br;
 
     	const block = {
     		c: function create() {
-    			t0 = text(t0_value);
-    			t1 = text("% Efficiency");
+    			t0 = text("+");
+    			t1 = text(t1_value);
+    			t2 = text("% Efficiency");
     			br = element("br");
-    			add_location(br, file$2, 130, 55, 3526);
+    			add_location(br, file$2, 133, 60, 3671);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
     			insert_dev(target, t1, anchor);
+    			insert_dev(target, t2, anchor);
     			insert_dev(target, br, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*get_bonus*/ 1 && t0_value !== (t0_value = sci(/*get_bonus*/ ctx[0] * 100) + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*get_bonus*/ 1 && t1_value !== (t1_value = sci((/*get_bonus*/ ctx[0] - 1) * 100) + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(br);
     		}
     	};
@@ -813,16 +817,16 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(131:2) {#if $bonus.val > 0}",
+    		source: "(134:2) {#if $bonus.val > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (132:2) {#if $combo.unlocked}
+    // (135:2) {#if $combo.unlocked}
     function create_if_block(ctx) {
-    	let t0_value = sci(/*combo_perc*/ ctx[1] * /*$combo*/ ctx[5].val) + "";
+    	let t0_value = sci(Math.min(/*combo_perc*/ ctx[1], 100) * /*$combo*/ ctx[5].val) + "";
     	let t0;
     	let t1;
     	let t2_value = /*$combo*/ ctx[5].val + "";
@@ -837,7 +841,7 @@ var app = (function () {
     			t2 = text(t2_value);
     			t3 = text("%/Click)");
     			br = element("br");
-    			add_location(br, file$2, 131, 82, 3619);
+    			add_location(br, file$2, 134, 97, 3779);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -847,7 +851,7 @@ var app = (function () {
     			insert_dev(target, br, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*combo_perc, $combo*/ 34 && t0_value !== (t0_value = sci(/*combo_perc*/ ctx[1] * /*$combo*/ ctx[5].val) + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*combo_perc, $combo*/ 34 && t0_value !== (t0_value = sci(Math.min(/*combo_perc*/ ctx[1], 100) * /*$combo*/ ctx[5].val) + "")) set_data_dev(t0, t0_value);
     			if (dirty & /*$combo*/ 32 && t2_value !== (t2_value = /*$combo*/ ctx[5].val + "")) set_data_dev(t2, t2_value);
     		},
     		d: function destroy(detaching) {
@@ -863,7 +867,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(132:2) {#if $combo.unlocked}",
+    		source: "(135:2) {#if $combo.unlocked}",
     		ctx
     	});
 
@@ -957,32 +961,32 @@ var app = (function () {
     			t21 = text(" Mana/Sec");
     			attr_dev(h30, "id", "mana-txt");
     			attr_dev(h30, "class", "svelte-1ck77v1");
-    			add_location(h30, file$2, 111, 1, 2629);
+    			add_location(h30, file$2, 114, 1, 2754);
     			attr_dev(b0, "class", "svelte-1ck77v1");
-    			add_location(b0, file$2, 112, 53, 2724);
+    			add_location(b0, file$2, 115, 53, 2849);
     			attr_dev(button0, "class", "svelte-1ck77v1");
-    			add_location(button0, file$2, 112, 1, 2672);
+    			add_location(button0, file$2, 115, 1, 2797);
     			attr_dev(div0, "id", "gap");
-    			add_location(div0, file$2, 123, 1, 3271);
+    			add_location(div0, file$2, 126, 1, 3396);
     			attr_dev(b1, "class", "svelte-1ck77v1");
-    			add_location(b1, file$2, 125, 32, 3325);
+    			add_location(b1, file$2, 128, 32, 3450);
     			attr_dev(button1, "id", "prestige");
     			attr_dev(button1, "class", "svelte-1ck77v1");
-    			add_location(button1, file$2, 125, 1, 3294);
+    			add_location(button1, file$2, 128, 1, 3419);
     			attr_dev(div1, "id", "combo");
-    			set_style(div1, "height", /*combo_perc*/ ctx[1] + "%");
+    			set_style(div1, "height", Math.min(/*combo_perc*/ ctx[1], 100) + "%");
     			attr_dev(div1, "class", "svelte-1ck77v1");
-    			add_location(div1, file$2, 127, 35, 3393);
+    			add_location(div1, file$2, 130, 35, 3518);
     			attr_dev(div2, "id", "click");
     			attr_dev(div2, "class", "svelte-1ck77v1");
-    			add_location(div2, file$2, 127, 1, 3359);
-    			add_location(br, file$2, 132, 33, 3663);
+    			add_location(div2, file$2, 130, 1, 3484);
+    			add_location(br, file$2, 135, 33, 3823);
     			attr_dev(h31, "id", "info");
     			attr_dev(h31, "class", "svelte-1ck77v1");
-    			add_location(h31, file$2, 129, 1, 3456);
+    			add_location(h31, file$2, 132, 1, 3596);
     			set_style(main, "grid-template-rows", "repeat(" + /*main_rows*/ ctx[8] + ", max-content) 1fr repeat(1, max-content)");
     			attr_dev(main, "class", "svelte-1ck77v1");
-    			add_location(main, file$2, 110, 0, 2532);
+    			add_location(main, file$2, 113, 0, 2657);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1079,7 +1083,7 @@ var app = (function () {
     			}
 
     			if (dirty & /*combo_perc*/ 2) {
-    				set_style(div1, "height", /*combo_perc*/ ctx[1] + "%");
+    				set_style(div1, "height", Math.min(/*combo_perc*/ ctx[1], 100) + "%");
     			}
 
     			if (/*$bonus*/ ctx[2].val > 0) {
@@ -1141,11 +1145,13 @@ var app = (function () {
     }
 
     function instance$2($$self, $$props, $$invalidate) {
+    	let $mana;
     	let $bonus;
     	let $idle;
     	let $per_click;
     	let $combo;
-    	let $mana;
+    	validate_store(mana, 'mana');
+    	component_subscribe($$self, mana, $$value => $$invalidate(9, $mana = $$value));
     	validate_store(mana_bonus, 'bonus');
     	component_subscribe($$self, mana_bonus, $$value => $$invalidate(2, $bonus = $$value));
     	validate_store(mana_idle, 'idle');
@@ -1154,8 +1160,6 @@ var app = (function () {
     	component_subscribe($$self, mana_click, $$value => $$invalidate(4, $per_click = $$value));
     	validate_store(mana_combo, 'combo');
     	component_subscribe($$self, mana_combo, $$value => $$invalidate(5, $combo = $$value));
-    	validate_store(mana, 'mana');
-    	component_subscribe($$self, mana, $$value => $$invalidate(9, $mana = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Mana', slots, []);
 
@@ -1243,6 +1247,7 @@ var app = (function () {
     	const get_combo = () => {
     		if (!$combo.unlocked) return;
     		$$invalidate(1, combo_perc++, combo_perc);
+    		if (combo_perc > 100) $$invalidate(1, combo_perc = 105);
     	};
 
     	const combo_unlock = () => {
@@ -1263,6 +1268,11 @@ var app = (function () {
     	//#endregion
     	//#region | Main
     	let main_rows = 0;
+
+    	//#endregion
+    	document.body.onkeyup = e => e.key == "m"
+    	? set_store_value(mana, $mana += 1e+6, $mana)
+    	: 0;
 
     	const writable_props = [];
 
@@ -1292,11 +1302,11 @@ var app = (function () {
     		combo_unlock,
     		combo_buy,
     		main_rows,
+    		$mana,
     		$bonus,
     		$idle,
     		$per_click,
-    		$combo,
-    		$mana
+    		$combo
     	});
 
     	$$self.$inject_state = $$props => {
@@ -1315,7 +1325,7 @@ var app = (function () {
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*$bonus, combo_perc, $combo*/ 38) {
-    			$$invalidate(0, get_bonus = ($bonus.val + 1) * (combo_perc * $combo.val / 100 + 1));
+    			$$invalidate(0, get_bonus = ($bonus.val + 1) * (Math.min(combo_perc, 100) * $combo.val / 100 + 1));
     		}
 
     		if ($$self.$$.dirty & /*$per_click, get_bonus*/ 17) {

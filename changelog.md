@@ -1,3 +1,6 @@
+## v0.1.3
+- Improved info text
+
 ## v0.1.2 [Hot Fix]
 - Made game test-ready
 

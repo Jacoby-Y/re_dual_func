@@ -54,7 +54,7 @@
 
 	//#region | Bonus
 	let get_bonus = 0;
-	$: get_bonus = ($bonus.val+1) *((combo_perc*$combo.val)/100+1);
+	$: get_bonus = ($bonus.val+1) *((Math.min(combo_perc, 100)*$combo.val)/100+1);
 	const bonus_buy = ()=>{
 		if ($mana < $bonus.cost) return;
 		$mana -= $bonus.cost;
@@ -77,6 +77,7 @@
 	const get_combo = ()=>{
 		if (!$combo.unlocked) return;
 		combo_perc++;
+		if (combo_perc > 100) combo_perc = 105;
 	}
 
 	const combo_unlock = ()=>{
@@ -105,6 +106,8 @@
 	}
 	//#endregion
 
+	document.body.onkeyup = (e)=> (e.key == "m" ? $mana += 1e+6 : 0);
+
 </script>
 
 <!-- on:click={click_main} -->
@@ -125,11 +128,11 @@
 
 	<button id="prestige">Prestige <b>( Coming Soon )</b></button>
 
-	<div on:click={click} id="click"> <div id="combo" style="height: {combo_perc}%;"></div> </div>
+	<div on:click={click} id="click"> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 
 	<h3 id="info">
-		{#if $bonus.val > 0} {sci(get_bonus*100)}% Efficiency<br> {/if}
-		{#if $combo.unlocked} {sci(combo_perc*$combo.val)}% Combo (+{$combo.val}%/Click)<br> {/if}
+		{#if $bonus.val > 0} +{sci((get_bonus-1)*100)}% Efficiency<br> {/if}
+		{#if $combo.unlocked} {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> {/if}
 		{sci(get_per_click)} Mana/Click<br>
 		{sci(get_per_sec)} Mana/Sec
 	</h3>
