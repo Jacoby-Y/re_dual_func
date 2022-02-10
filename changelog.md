@@ -1,3 +1,7 @@
+## v0.2
+- Added prestige functionality + bonus
+- Added lock image to power section
+
 ## v0.1.3
 - Improved info text
 

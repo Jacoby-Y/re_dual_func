@@ -31,6 +31,10 @@ export let mana_combo = w({
 	cost: 1000,
 	val: 1,
 });
+export let mana_prestige = w({
+	cost: 1e+6,
+	times: 0,
+});
 
 //#region | Post-Setup
 window.onbeforeunload = ()=>{

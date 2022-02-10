@@ -1,5 +1,5 @@
 <script>
-	import { mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo } from "../stores.js";
+	import { mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige } from "../stores.js";
 	import { sci } from "../functions";
 
 	//#region | Per Click
@@ -54,7 +54,7 @@
 
 	//#region | Bonus
 	let get_bonus = 0;
-	$: get_bonus = ($bonus.val+1) *((Math.min(combo_perc, 100)*$combo.val)/100+1);
+	$: get_bonus = (($bonus.val+1) *((Math.min(combo_perc, 100)*$combo.val)/100+1)) * (1 + $prestige.times * 0.5);
 	const bonus_buy = ()=>{
 		if ($mana < $bonus.cost) return;
 		$mana -= $bonus.cost;
@@ -95,13 +95,31 @@
 	}
 	//#endregion
 
+	//#region | Prestige
+	const do_prestige = ()=>{
+		if ($mana < $prestige.cost) return;
+		$mana = 0;
+		$per_click.cost = 25;
+		$per_click.val = 1;
+		$idle.cost = 100;
+		$idle.val = 0;
+		$bonus.cost = 1000;
+		$bonus.val = 0;
+		$combo.unlocked = false;
+		$combo.cost = 1000;
+		$combo.val = 0;
+		combo_perc = 0;
+		$prestige.times++;
+	}
+	//#endregion
+
 	//#region | Main
 	let main_rows = 0;
 	$: {
 		let total = 2;
-		if ($per_click.val > 1) (total++, console.log($per_click.val));
-		if ($idle.val > 0) (total++, console.log($idle.val));
-		if ($bonus.val > 0) (total++, console.log($bonus.val));
+		if ($per_click.val > 1) total++;
+		if ($idle.val > 0) total++;
+		if ($bonus.val > 0) total++;
 		main_rows = total;
 	}
 	//#endregion
@@ -112,10 +130,15 @@
 
 <!-- on:click={click_main} -->
 <main style="grid-template-rows: repeat({main_rows}, max-content) 1fr repeat(1, max-content);">
-	<h3 id="mana-txt">Mana: {sci($mana)}</h3>
-	<button on:click={per_click_buy}>Base Mana/Click +1 <b>{sci($per_click.cost)} Mana</b></button>
-	{#if $per_click.val > 1} <button on:click={idle_buy}>Base Mana/Sec +5 <b>{sci($idle.cost)} Mana</b></button> {/if}
-	{#if $idle.val > 0} <button on:click={bonus_buy}>Bonus to Base Mana +25% <b>{sci($bonus.cost)} Mana</b></button> {/if}
+	<!-- Mana Text -->
+		<h3 id="mana-txt">Mana: {sci($mana)}</h3>
+	<!-- Upgrade Mana/Click -->
+		<button on:click={per_click_buy}>Base Mana/Click +1 <b>{sci($per_click.cost)} Mana</b></button>
+	<!-- Upgrade Mana/Sec -->
+		{#if $per_click.val > 1} <button on:click={idle_buy}>Base Mana/Sec +5 <b>{sci($idle.cost)} Mana</b></button> {/if}
+	<!-- Bonus Mana -->
+		{#if $idle.val > 0} <button on:click={bonus_buy}>Bonus to Base Mana +25% <b>{sci($bonus.cost)} Mana</b></button> {/if}
+	<!-- Combo -->
 	{#if $bonus.val > 0}
 		{#if $combo.unlocked == false}
 			<button on:click={combo_unlock}>Unlock Click Combo <b>{sci($combo.unlock)} Mana</b></button>
@@ -126,13 +149,15 @@
 	
 	<div id="gap"></div>
 
-	<button id="prestige">Prestige <b>( Coming Soon )</b></button>
+	<button id="prestige" on:click={do_prestige}>Prestige <b>{sci($prestige.cost)} Mana</b></button>
 
 	<div on:click={click} id="click"> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 
 	<h3 id="info">
 		{#if $bonus.val > 0} +{sci((get_bonus-1)*100)}% Efficiency<br> {/if}
-		{#if $combo.unlocked} {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> {/if}
+		{#if $combo.unlocked} {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> 
+			{#if $prestige.times <= 0}<hr>{/if}{/if}
+		{#if $prestige.times > 0} {sci(($prestige.times*0.5)*100)}% Prestige Bonus<br> <hr>{/if}
 		{sci(get_per_click)} Mana/Click<br>
 		{sci(get_per_sec)} Mana/Sec
 	</h3>
@@ -171,6 +196,9 @@
 		font-weight: normal;
 		text-align: center;
 		line-height: 1.5rem;
+	}
+	#info hr {
+		margin: 0.5rem;
 	}
 
 	#click {
