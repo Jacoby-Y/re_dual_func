@@ -60,7 +60,9 @@
 
 	//#region | Bonus
 	let get_bonus = 0;
-	$: get_bonus = (($bonus.val+1) *((Math.min(combo_perc, 100)*$combo.val)/100+1)) * (1 + $prestige.times * 0.5);
+	// $: get_bonus = (($bonus.val+1) *((Math.min(combo_perc, 100)*$combo.val)/100+1)) * (1 + $prestige.times * 0.5);/
+	$: get_bonus = ($bonus.val * (1 + (Math.min(combo_perc, 100) * $combo.val)/100)) * (1 + $prestige.times * 0.5)
+	// $: console.log(get_bonus);
 	const bonus_buy = ()=>{
 		if ($mana < $bonus.cost) return;
 		$mana -= $bonus.cost;
@@ -149,7 +151,7 @@
 </script>
 
 <!-- on:click={click_main} -->
-<main style="grid-template-rows: repeat({main_rows}, max-content) 1fr repeat(1, max-content);">
+<main style="grid-template-rows: repeat({main_rows}, max-content) 1fr repeat(2, max-content);">
 	<!-- Mana Text -->
 		<h3 id="mana-txt">Mana: {sci($mana)}</h3>
 	<!-- Upgrade Mana/Click -->
@@ -159,25 +161,29 @@
 	<!-- Bonus Mana -->
 		{#if $idle.val > 0} <button on:click={bonus_buy}>Bonus to Base Mana +25% <b>{sci($bonus.cost)} Mana</b></button> {/if}
 	<!-- Combo -->
-	{#if $bonus.val > 0}
-		{#if $combo.unlocked == false}
-			<button on:click={combo_unlock}>Unlock Click Combo <b>{sci($combo.unlock)} Mana</b></button>
-		{:else}
-			<button on:click={combo_buy}>Combo Bonus +1% <b>{sci($combo.cost)} Mana</b></button>
+		{#if $bonus.val > 0}
+			{#if $combo.unlocked == false}
+				<button on:click={combo_unlock}>Unlock Click Combo <b>{sci($combo.unlock)} Mana</b></button>
+			{:else}
+				<button on:click={combo_buy}>Combo Bonus +1% <b>{sci($combo.cost)} Mana</b></button>
+			{/if}
 		{/if}
-	{/if}
-	
+	<!---->
+
 	<div id="gap"></div>
 
-	<button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds} : {isFinite($prestige.fastest)? $prestige.fastest : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button>
+	<h3 id="extra-info">
+		{#if $bonus.val > 0} {sci(($bonus.val)*100)}% Bonus Bonus<br>{/if}
+		{#if $combo.unlocked} * {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> {/if}
+		{#if $prestige.times > 0} * {sci(($prestige.times*0.5)*100)}% Prestige Bonus<br>{/if}
+	</h3>
+
+	<button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds}s | Best: {isFinite($prestige.fastest)? $prestige.fastest+'s' : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button>
 
 	<div on:click={click} id="click"> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 
 	<h3 id="info">
-		{#if $bonus.val > 0} +{sci((get_bonus-1)*100)}% Efficiency<br> <hr> {/if}
-		{#if $combo.unlocked} {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> 
-			{#if $prestige.times <= 0}<hr>{/if}{/if}
-		{#if $prestige.times > 0} {sci(($prestige.times*0.5)*100)}% Prestige Bonus<br> <hr>{/if}
+		{#if $bonus.val > 0} +{sci(get_bonus*100)}% Efficiency<br> <hr> {/if}
 		{sci(get_per_click)} Mana/Click<br>
 		{sci(get_per_sec)} Mana/Sec
 	</h3>
@@ -220,6 +226,11 @@
 	#info hr {
 		border-color: aqua;
 		margin: 0.5rem;
+	}
+	#extra-info {
+		color: #03dac6;
+		font-weight: normal;
+		padding: 0 0.5rem;
 	}
 
 	#click {

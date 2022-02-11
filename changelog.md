@@ -1,3 +1,7 @@
+## v0.3.1
+- Better organization of efficiency info
+- Changed the get_bonus value to make more sense
+
 ## v0.3
 - Added favicon and title
 - Added prestige times / bonus
