@@ -3,11 +3,28 @@
 	import Mana from "./components/Mana.svelte";
 	import Power from "./components/Power.svelte";
 
+	import { mana } from "./stores.js";
+
+	let max_buy = false;
+
+	document.body.onkeyup = (e)=> { 
+		const k = e.key;
+		; k == "m" ? $mana += 1e+6 
+		: k == "Shift" ? max_buy = false
+		: 0;
+	}
+	document.body.onkeydown = (e)=> { 
+		const k = e.key;
+		; k == "m" ? 0
+		: k == "Shift" ? max_buy = true
+		: 0;
+	}
+
 </script>
 
 <main>
 
-	<Mana/>
+	<Mana bind:max_buy={max_buy}/>
 	<div id="border"></div>
 	<Power/>
 

@@ -34,6 +34,8 @@ export let mana_combo = w({
 export let mana_prestige = w({
 	cost: 1e+6,
 	times: 0,
+	seconds: 0,
+	fastest: Infinity,
 });
 
 //#region | Post-Setup

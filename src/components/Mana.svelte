@@ -1,15 +1,19 @@
 <script>
+	export let max_buy;
+
 	import { mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige } from "../stores.js";
 	import { sci } from "../functions";
 
 	//#region | Per Click
-	const click = ()=> { $mana += $per_click.val; get_combo() };
+	const click = ()=> { $mana += get_per_click; get_combo() };
 	const per_click_buy = ()=>{
 		if ($mana < $per_click.cost) return;
 		$mana -= $per_click.cost;
 		$per_click.cost = Math.ceil($per_click.cost * 1.15);
 		$per_click.val++;
 		$per_click = $per_click;
+
+		if (max_buy) per_click_buy();
 	}
 
 	let get_per_click = 0;
@@ -49,6 +53,8 @@
 		$idle.cost = Math.ceil($idle.cost * 1.15);
 		$idle.val += 5;
 		$idle = $idle;
+
+		if (max_buy) idle_buy();
 	}
 	//#endregion
 
@@ -61,6 +67,8 @@
 		$bonus.cost = Math.ceil($bonus.cost * 1.25);
 		$bonus.val += 0.25;
 		$bonus = $bonus;
+
+		if (max_buy) bonus_buy();
 	}
 	//#endregion
 
@@ -84,6 +92,7 @@
 		if ($mana < $combo.unlock) return;
 		$mana -= $combo.unlock;
 		$combo.unlocked = true;
+		$combo.val = 1;
 		$combo = $combo;
 	}
 	const combo_buy = ()=>{
@@ -92,10 +101,17 @@
 		$combo.cost = Math.round($combo.cost * 1.25);
 		$combo.val++;
 		$combo = $combo;
+
+		if (max_buy) combo_buy();
 	}
 	//#endregion
 
 	//#region | Prestige
+	
+	const prest_loop = setInterval(() => {
+		$prestige.seconds++;
+	}, 1000);
+
 	const do_prestige = ()=>{
 		if ($mana < $prestige.cost) return;
 		$mana = 0;
@@ -110,6 +126,9 @@
 		$combo.val = 0;
 		combo_perc = 0;
 		$prestige.times++;
+
+		if ($prestige.seconds < $prestige.fastest) $prestige.fastest = $prestige.seconds;
+		$prestige.seconds = 0;
 	}
 	//#endregion
 
@@ -124,7 +143,8 @@
 	}
 	//#endregion
 
-	document.body.onkeyup = (e)=> (e.key == "m" ? $mana += 1e+6 : 0);
+	// $: console.log($mana);
+	// $: console.log("Max buying: " + max_buy);
 
 </script>
 
@@ -149,12 +169,12 @@
 	
 	<div id="gap"></div>
 
-	<button id="prestige" on:click={do_prestige}>Prestige <b>{sci($prestige.cost)} Mana</b></button>
+	<button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds} : {isFinite($prestige.fastest)? $prestige.fastest : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button>
 
 	<div on:click={click} id="click"> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 
 	<h3 id="info">
-		{#if $bonus.val > 0} +{sci((get_bonus-1)*100)}% Efficiency<br> {/if}
+		{#if $bonus.val > 0} +{sci((get_bonus-1)*100)}% Efficiency<br> <hr> {/if}
 		{#if $combo.unlocked} {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> 
 			{#if $prestige.times <= 0}<hr>{/if}{/if}
 		{#if $prestige.times > 0} {sci(($prestige.times*0.5)*100)}% Prestige Bonus<br> <hr>{/if}
@@ -198,6 +218,7 @@
 		line-height: 1.5rem;
 	}
 	#info hr {
+		border-color: aqua;
 		margin: 0.5rem;
 	}
 

@@ -1,3 +1,9 @@
+## v0.3
+- Added favicon and title
+- Added prestige times / bonus
+- Added max buy
+- Fixed number display bug
+
 ## v0.2
 - Added prestige functionality + bonus
 - Added lock image to power section
