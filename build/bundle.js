@@ -472,7 +472,7 @@ var app = (function () {
     // name.subscribe((v)=> to_store.name = v);
 
     //#region | Mana Stuffs
-    let mana = w(1e+8); //-! DEBUG VALUE | w(0); //
+    let mana = w(0); //w(1e+8); //-! DEBUG VALUE | 
     let mana_click = w({
     	cost: 25,
     	val: 1,
@@ -564,9 +564,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-13k4gcl");
-    			add_location(b, file$2, 177, 72, 4558);
+    			add_location(b, file$2, 177, 72, 4563);
     			attr_dev(button, "class", "svelte-13k4gcl");
-    			add_location(button, file$2, 177, 27, 4513);
+    			add_location(button, file$2, 177, 27, 4518);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -620,9 +620,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-13k4gcl");
-    			add_location(b, file$2, 179, 75, 4699);
+    			add_location(b, file$2, 179, 75, 4704);
     			attr_dev(button, "class", "svelte-13k4gcl");
-    			add_location(button, file$2, 179, 22, 4646);
+    			add_location(button, file$2, 179, 22, 4651);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -727,9 +727,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-13k4gcl");
-    			add_location(b, file$2, 185, 49, 4975);
+    			add_location(b, file$2, 185, 49, 4980);
     			attr_dev(button, "class", "svelte-13k4gcl");
-    			add_location(button, file$2, 185, 4, 4930);
+    			add_location(button, file$2, 185, 4, 4935);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -783,9 +783,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text(" Mana");
     			attr_dev(b, "class", "svelte-13k4gcl");
-    			add_location(b, file$2, 183, 55, 4873);
+    			add_location(b, file$2, 183, 55, 4878);
     			attr_dev(button, "class", "svelte-13k4gcl");
-    			add_location(button, file$2, 183, 4, 4822);
+    			add_location(button, file$2, 183, 4, 4827);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -832,7 +832,7 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = text("% Bonus Bonus");
     			br = element("br");
-    			add_location(br, file$2, 193, 59, 5146);
+    			add_location(br, file$2, 193, 59, 5151);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -879,7 +879,7 @@ var app = (function () {
     			t3 = text(t3_value);
     			t4 = text("%/Click)");
     			br = element("br");
-    			add_location(br, file$2, 194, 99, 5255);
+    			add_location(br, file$2, 194, 99, 5260);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -928,7 +928,7 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text("% Prestige Bonus");
     			br = element("br");
-    			add_location(br, file$2, 195, 78, 5344);
+    			add_location(br, file$2, 195, 78, 5349);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -972,7 +972,7 @@ var app = (function () {
     			t1 = text(t1_value);
     			t2 = text("% Ichor Bonus");
     			br = element("br");
-    			add_location(br, file$2, 196, 69, 5423);
+    			add_location(br, file$2, 196, 69, 5428);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -1020,9 +1020,9 @@ var app = (function () {
     			br = element("br");
     			t3 = space();
     			hr = element("hr");
-    			add_location(br, file$2, 204, 60, 5869);
+    			add_location(br, file$2, 204, 60, 5874);
     			attr_dev(hr, "class", "svelte-13k4gcl");
-    			add_location(hr, file$2, 204, 65, 5874);
+    			add_location(hr, file$2, 204, 65, 5879);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t0, anchor);
@@ -1180,38 +1180,38 @@ var app = (function () {
     			t31 = text(" Mana/Sec");
     			attr_dev(h30, "id", "mana-txt");
     			attr_dev(h30, "class", "svelte-13k4gcl");
-    			add_location(h30, file$2, 173, 2, 4290);
+    			add_location(h30, file$2, 173, 2, 4295);
     			attr_dev(b0, "class", "svelte-13k4gcl");
-    			add_location(b0, file$2, 175, 54, 4415);
+    			add_location(b0, file$2, 175, 54, 4420);
     			attr_dev(button0, "class", "svelte-13k4gcl");
-    			add_location(button0, file$2, 175, 2, 4363);
+    			add_location(button0, file$2, 175, 2, 4368);
     			attr_dev(div0, "id", "gap");
-    			add_location(div0, file$2, 190, 1, 5043);
+    			add_location(div0, file$2, 190, 1, 5048);
     			attr_dev(h31, "id", "extra-info");
     			attr_dev(h31, "class", "svelte-13k4gcl");
-    			add_location(h31, file$2, 192, 1, 5066);
+    			add_location(h31, file$2, 192, 1, 5071);
     			attr_dev(b1, "class", "svelte-13k4gcl");
-    			add_location(b1, file$2, 199, 149, 5590);
+    			add_location(b1, file$2, 199, 149, 5595);
     			attr_dev(button1, "id", "prestige");
     			attr_dev(button1, "class", "svelte-13k4gcl");
-    			add_location(button1, file$2, 199, 1, 5442);
+    			add_location(button1, file$2, 199, 1, 5447);
     			attr_dev(h32, "id", "max");
     			attr_dev(h32, "class", "svelte-13k4gcl");
-    			add_location(h32, file$2, 201, 35, 5669);
+    			add_location(h32, file$2, 201, 35, 5674);
     			attr_dev(div1, "id", "combo");
     			set_style(div1, "height", Math.min(/*combo_perc*/ ctx[1], 100) + "%");
     			attr_dev(div1, "class", "svelte-13k4gcl");
-    			add_location(div1, file$2, 201, 82, 5716);
+    			add_location(div1, file$2, 201, 82, 5721);
     			attr_dev(div2, "id", "click");
     			attr_dev(div2, "class", "svelte-13k4gcl");
-    			add_location(div2, file$2, 201, 1, 5635);
-    			add_location(br, file$2, 205, 33, 5918);
+    			add_location(div2, file$2, 201, 1, 5640);
+    			add_location(br, file$2, 205, 33, 5923);
     			attr_dev(h33, "id", "info");
     			attr_dev(h33, "class", "svelte-13k4gcl");
-    			add_location(h33, file$2, 203, 1, 5794);
+    			add_location(h33, file$2, 203, 1, 5799);
     			set_style(main, "grid-template-rows", "repeat(" + /*main_rows*/ ctx[11] + ", max-content) 1fr repeat(2, max-content)");
     			attr_dev(main, "class", "svelte-13k4gcl");
-    			add_location(main, file$2, 171, 0, 4172);
+    			add_location(main, file$2, 171, 0, 4177);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1587,7 +1587,7 @@ var app = (function () {
 
     	const do_prestige = () => {
     		if ($mana < $prestige.cost) return;
-    		set_store_value(mana, $mana = 2e+6, $mana); //-! DEBUG VALUE
+    		set_store_value(mana, $mana = 0, $mana); //2e+6; //-! DEBUG VALUE
     		set_store_value(mana_click, $per_click.cost = 25, $per_click);
     		set_store_value(mana_click, $per_click.val = 1, $per_click);
     		set_store_value(mana_idle, $idle.cost = 100, $idle);
@@ -1784,7 +1784,7 @@ var app = (function () {
     			div = element("div");
     			attr_dev(div, "id", "lock");
     			attr_dev(div, "class", "svelte-1o6ywpv");
-    			add_location(div, file$1, 96, 1, 2616);
+    			add_location(div, file$1, 96, 1, 2613);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1806,7 +1806,7 @@ var app = (function () {
     	return block;
     }
 
-    // (80:0) {#if $mana_prestige.times >= 5 || true }
+    // (80:0) {#if $mana_prestige.times >= 5 }
     function create_if_block(ctx) {
     	let h30;
     	let t0;
@@ -1909,51 +1909,51 @@ var app = (function () {
     			b2.textContent = "2 Ichor";
     			attr_dev(h30, "id", "power");
     			attr_dev(h30, "class", "svelte-1o6ywpv");
-    			add_location(h30, file$1, 80, 1, 1826);
+    			add_location(h30, file$1, 80, 1, 1823);
     			attr_dev(h31, "id", "core-info");
     			attr_dev(h31, "class", "svelte-1o6ywpv");
-    			add_location(h31, file$1, 81, 22, 1889);
+    			add_location(h31, file$1, 81, 22, 1886);
     			set_style(div0, "width", round(/*bar_perc*/ ctx[1], 1) + "%");
     			attr_dev(div0, "class", "svelte-1o6ywpv");
-    			add_location(div0, file$1, 81, 76, 1943);
+    			add_location(div0, file$1, 81, 76, 1940);
     			attr_dev(h32, "id", "perc");
     			attr_dev(h32, "class", "svelte-1o6ywpv");
-    			add_location(h32, file$1, 81, 126, 1993);
+    			add_location(h32, file$1, 81, 126, 1990);
     			attr_dev(div1, "id", "power-bar");
     			attr_dev(div1, "class", "svelte-1o6ywpv");
-    			add_location(div1, file$1, 81, 1, 1868);
+    			add_location(div1, file$1, 81, 1, 1865);
     			attr_dev(h33, "id", "power-cost");
     			attr_dev(h33, "class", "svelte-1o6ywpv");
-    			add_location(h33, file$1, 83, 1, 2043);
+    			add_location(h33, file$1, 83, 1, 2040);
     			attr_dev(h34, "id", "max");
     			attr_dev(h34, "class", "svelte-1o6ywpv");
-    			add_location(h34, file$1, 85, 34, 2152);
+    			add_location(h34, file$1, 85, 34, 2149);
     			attr_dev(div2, "id", "click");
     			attr_dev(div2, "class", "svelte-1o6ywpv");
-    			add_location(div2, file$1, 85, 1, 2119);
+    			add_location(div2, file$1, 85, 1, 2116);
     			attr_dev(b0, "class", "svelte-1o6ywpv");
-    			add_location(b0, file$1, 87, 81, 2287);
+    			add_location(b0, file$1, 87, 81, 2284);
     			attr_dev(button0, "id", "prestige");
     			attr_dev(button0, "class", "svelte-1o6ywpv");
-    			add_location(button0, file$1, 87, 1, 2207);
+    			add_location(button0, file$1, 87, 1, 2204);
     			attr_dev(div3, "id", "ichor-hover");
     			attr_dev(div3, "style", div3_style_value = /*$unlocked_ichor*/ ctx[4] <= 0 ? "display: none;" : "");
     			attr_dev(div3, "class", "svelte-1o6ywpv");
-    			add_location(div3, file$1, 89, 1, 2325);
+    			add_location(div3, file$1, 89, 1, 2322);
     			attr_dev(h35, "id", "ichor-amount");
     			attr_dev(h35, "class", "svelte-1o6ywpv");
-    			add_location(h35, file$1, 91, 2, 2436);
+    			add_location(h35, file$1, 91, 2, 2433);
     			attr_dev(b1, "class", "svelte-1o6ywpv");
-    			add_location(b1, file$1, 92, 47, 2526);
+    			add_location(b1, file$1, 92, 47, 2523);
     			attr_dev(button1, "class", "svelte-1o6ywpv");
-    			add_location(button1, file$1, 92, 2, 2481);
+    			add_location(button1, file$1, 92, 2, 2478);
     			attr_dev(b2, "class", "svelte-1o6ywpv");
-    			add_location(b2, file$1, 93, 25, 2575);
+    			add_location(b2, file$1, 93, 25, 2572);
     			attr_dev(button2, "class", "svelte-1o6ywpv");
-    			add_location(button2, file$1, 93, 2, 2552);
+    			add_location(button2, file$1, 93, 2, 2549);
     			attr_dev(div4, "id", "ichor-menu");
     			attr_dev(div4, "class", "svelte-1o6ywpv");
-    			add_location(div4, file$1, 90, 1, 2412);
+    			add_location(div4, file$1, 90, 1, 2409);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h30, anchor);
@@ -2053,7 +2053,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(80:0) {#if $mana_prestige.times >= 5 || true }",
+    		source: "(80:0) {#if $mana_prestige.times >= 5 }",
     		ctx
     	});
 
@@ -2064,7 +2064,7 @@ var app = (function () {
     	let main;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*$mana_prestige*/ ctx[7].times >= 5 || true) return create_if_block;
+    		if (/*$mana_prestige*/ ctx[7].times >= 5) return create_if_block;
     		return create_else_block;
     	}
 
@@ -2076,7 +2076,7 @@ var app = (function () {
     			main = element("main");
     			if_block.c();
     			attr_dev(main, "class", "svelte-1o6ywpv");
-    			add_location(main, file$1, 78, 0, 1777);
+    			add_location(main, file$1, 78, 0, 1782);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2173,10 +2173,10 @@ var app = (function () {
 
     	const power_loop = setInterval(
     		() => {
-    			set_store_value(power_progress, $prog.val += $power / 4, $prog);
+    			set_store_value(power_progress, $prog.val += $power / 10, $prog);
     			power_progress.set($prog);
     		},
-    		250
+    		1000 / 10
     	);
 
     	//#endregion
