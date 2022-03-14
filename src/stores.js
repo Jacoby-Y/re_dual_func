@@ -13,7 +13,7 @@ const to_store = {};
 // name.subscribe((v)=> to_store.name = v);
 
 //#region | Mana Stuffs
-export let mana = w(1e+8); //-! DEBUG VALUE | w(0); //
+export let mana = w(0); //w(1e+8); //-! DEBUG VALUE | 
 export let mana_click = w({
 	cost: 25,
 	val: 1,

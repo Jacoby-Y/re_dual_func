@@ -119,7 +119,7 @@
 
 	const do_prestige = ()=>{
 		if ($mana < $prestige.cost) return;
-		$mana = 2e+6; //-! DEBUG VALUE
+		$mana = 0; //2e+6; //-! DEBUG VALUE
 		$per_click.cost = 25;
 		$per_click.val = 1;
 		$idle.cost = 100;

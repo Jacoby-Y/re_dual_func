@@ -50,9 +50,9 @@
 	}
 
 	const power_loop = setInterval(() => {
-		$prog.val += $power / 4;
+		$prog.val += $power / 10;
 		$prog = $prog;
-	}, 250);
+	}, 1000/10);
 	//#endregion
 	//#region | Prestige Stuff
 	let next_ichor = 0;
@@ -77,7 +77,7 @@
 </script>
 
 <main>
-{#if $mana_prestige.times >= 5 || true }
+{#if $mana_prestige.times >= 5 }
 	<h3 id="power">Power: {sci($power)}</h3>
 	<div id="power-bar"> <h3 id="core-info">Planet Cores: {$cores.planet}</h3> <div style="width: {round(bar_perc, 1)}%;"></div> <h3 id="perc">{round(bar_perc, 1)}%</h3> </div>
 

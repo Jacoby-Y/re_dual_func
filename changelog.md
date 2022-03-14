@@ -1,3 +1,8 @@
+## v0.4.1 [Hot Fix] 
+- Removed debug settings
+- Increase power progress tick speed
+- Added version to the title
+
 ## v0.4
 - Added cores, ichor, and prestige to the power section
 
