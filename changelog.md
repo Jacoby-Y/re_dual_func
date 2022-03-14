@@ -1,3 +1,6 @@
+## v0.4
+- Added cores, ichor, and prestige to the power section
+
 ## v0.3.1
 - Better organization of efficiency info
 - Changed the get_bonus value to make more sense

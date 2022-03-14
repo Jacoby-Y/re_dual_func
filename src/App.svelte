@@ -3,7 +3,7 @@
 	import Mana from "./components/Mana.svelte";
 	import Power from "./components/Power.svelte";
 
-	import { mana } from "./stores.js";
+	import { mana, ichor } from "./stores.js";
 
 	let max_buy = false;
 
@@ -11,6 +11,7 @@
 		const k = e.key;
 		; k == "m" ? $mana += 1e+6 
 		: k == "Shift" ? max_buy = false
+		: k == "i" ? $ichor++
 		: 0;
 	}
 	document.body.onkeydown = (e)=> { 
@@ -26,7 +27,7 @@
 
 	<Mana bind:max_buy={max_buy}/>
 	<div id="border"></div>
-	<Power/>
+	<Power bind:max_buy={max_buy}/>
 
 </main>
 

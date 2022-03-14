@@ -9,3 +9,7 @@ export const toExp = (num, place)=>{
   return (Math.floor(num/(10**pow)*place)/place + `e${pow}`);
 }
 export const sci = (num, place=1)=> num >= 1000 ? toExp(num, place).replace("+", "") : round(num);
+export const fix_big_num = (num, place)=>{
+  const l = Math.floor(Math.log10(num));
+  return Math.round(num / ((10**l)/(10**place)))*((10**l)/(10**place));
+}
