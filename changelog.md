@@ -1,3 +1,7 @@
+## v0.4.2
+- Fixed calculation for mana per click
+- Added functionality for mana-to-power discount
+
 ## v0.4.1 [Hot Fix] 
 - Removed debug settings
 - Increase power progress tick speed

@@ -60,7 +60,7 @@
 
 	//#region | Bonus
 	let get_bonus = 0;
-	$: get_bonus = (1 + (($bonus.val <= 0 ? 1 : $bonus.val) * (1 + (Math.min(combo_perc, 100) * $combo.val)/100)) * (1 + $prestige.times * 0.5)) * (1 + $mana_ichor_bonus/100);
+	$: get_bonus = ((($bonus.val <= 0 ? 1 : 1 + $bonus.val) * (1 + (Math.min(combo_perc, 100) * $combo.val)/100)) * (1 + $prestige.times * 0.5)) * (1 + $mana_ichor_bonus/100);
 	// $: console.log(get_bonus);
 	// p1 * p2 * p3 | bonus * combo * prestige
 	// $: console.log(`1 + (${$bonus.val <= 0 ? 1 : $bonus.val} * ${1 + (Math.min(combo_perc, 100) * $combo.val)/100}) * ${1 + $prestige.times * 0.5}`)

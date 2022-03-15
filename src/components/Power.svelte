@@ -5,15 +5,18 @@
 	} from "../stores.js";
 	import { round, floor, sci } from "../functions.js";
 	
+	let cost = 0;
+	$: cost = $power_cost * (1-$discount/100);
+
 	const click = ()=>{
-		if ($mana < $power_cost) return;
+		if ($mana < cost) return;
 		if (max_buy) {
-			let max = floor($mana / $power_cost, 0);
-			$mana -= $power_cost * max;
+			let max = floor($mana / cost, 0);
+			$mana -= cost * max;
 			$power += max;
 		} else {
 			$power++;
-			$mana -= $power_cost;
+			$mana -= cost;
 		}
 	}
 
@@ -73,6 +76,11 @@
 		$mana_ichor_bonus += 1;
 		$ichor -= 1;
 	}
+	const upgr2 = ()=>{ // Mana Efficiency
+		if ($ichor < 2) return;
+		$discount += 1;
+		$ichor -= 2;
+	}
 	//#endregion 
 </script>
 
@@ -81,7 +89,7 @@
 	<h3 id="power">Power: {sci($power)}</h3>
 	<div id="power-bar"> <h3 id="core-info">Planet Cores: {$cores.planet}</h3> <div style="width: {round(bar_perc, 1)}%;"></div> <h3 id="perc">{round(bar_perc, 1)}%</h3> </div>
 
-	<h3 id="power-cost">{sci(1e3 * (1 - $discount/100))} Mana -> 1 Power</h3>
+	<h3 id="power-cost">{sci(cost)} Mana -> 1 Power</h3>
 
 	<div id="click" on:click={click}><h3 id="max" bind:this={max_text}>Buy Max</h3></div>
 
@@ -91,8 +99,10 @@
 	<div id="ichor-menu">
 		<h3 id="ichor-amount">Ichor: {$ichor}</h3>
 		<button on:click={upgr1}>Mana Efficiency +1% <b>1 Ichor</b></button>
-		<button>Power Cost -1% <b>2 Ichor</b></button>
+		<button on:click={upgr2}>Power Cost -1% <b>2 Ichor</b></button>
 	</div>
+
+	{#if $discount > 0} <h3 id="discount-info">Cost Discount: -{$discount}%</h3> {/if}
 {:else}
 	<div id="lock"></div>
 {/if}
@@ -232,5 +242,13 @@
 	#ichor-hover:hover + #ichor-menu, #ichor-menu:hover {
 		transform:  translate(0, -50%);
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+
+	#discount-info {
+		position: absolute;
+		left: 1rem;
+		bottom: 3.2rem;
+		color: #cca2ff;
+		font-weight: normal;
 	}
 </style>

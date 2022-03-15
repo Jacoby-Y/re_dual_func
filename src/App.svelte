@@ -16,7 +16,7 @@
 	}
 	document.body.onkeydown = (e)=> { 
 		const k = e.key;
-		; k == "m" ? 0
+		; k == "m" ? $mana += 1e+6
 		: k == "Shift" ? max_buy = true
 		: 0;
 	}
