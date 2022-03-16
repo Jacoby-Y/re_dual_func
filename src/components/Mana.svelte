@@ -80,17 +80,14 @@
 	//#region | Combo
 	let combo_perc = 0;
 	const combo_loop = setInterval(() => {
-		( combo_perc > 0 
-			? combo_perc -= 1
-			: ( combo_perc < 0 
-				? combo_perc = 0 
-				: 0 ));
-	}, 250);
+		if (combo_perc >= 0) combo_perc -= 1;
+		if (combo_perc < 0) combo_perc = 0
+	}, 333);
 
 	const get_combo = ()=>{
 		if (!$combo.unlocked) return;
 		combo_perc++;
-		if (combo_perc > 100) combo_perc = 105;
+		if (combo_perc > 100) combo_perc = 120;
 	}
 
 	const combo_unlock = ()=>{
@@ -116,6 +113,16 @@
 	const prest_loop = setInterval(() => {
 		$prestige.seconds++;
 	}, 1000);
+
+	export const reset_mana = ()=>{
+		$mana = 0;
+		per_click.update(v => (v.cost = 25, v.val = 1, v));
+		idle.update(v => (v.cost = 100, v.val = 0, v));
+		bonus.update(v => (v.cost = 1000, v.val = 0, v));
+		combo.update(v => (v.cost = 1000, v.val = 0, v.unlocked = false, v.unlock = 7500, v));
+		prestige.update(v => (v.cost = 1e+6, v.times = 0, v));
+
+	}
 
 	const do_prestige = ()=>{
 		if ($mana < $prestige.cost) return;
@@ -197,7 +204,7 @@
 		{#if $mana_ichor_bonus > 0} * {sci($mana_ichor_bonus)}% Ichor Bonus<br>{/if}
 	</h3>
 
-	<button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds}s | Best: {isFinite($prestige.fastest)? $prestige.fastest+'s' : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button>
+	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds}s | Best: {isFinite($prestige.fastest)? $prestige.fastest+'s' : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}
 
 	<div on:click={click} id="click"> <h3 id="max" bind:this={max_text}>Buy Max</h3> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 

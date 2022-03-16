@@ -1,3 +1,8 @@
+## v0.4.3
+- Added prestige modal for power prestige
+- Power prestige now resets mana too
+- Added quality of life changes and fixes
+
 ## v0.4.2
 - Fixed calculation for mana per click
 - Added functionality for mana-to-power discount

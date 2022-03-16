@@ -2,6 +2,7 @@
 	// import { name } from "./stores.js";
 	import Mana from "./components/Mana.svelte";
 	import Power from "./components/Power.svelte";
+	import PrestigeModal from "./components/PrestigeModal.svelte";
 
 	import { mana, ichor } from "./stores.js";
 
@@ -21,13 +22,33 @@
 		: 0;
 	}
 
+	let power_modal_active = false;
+
+	let on_yes = ()=>{
+		// Prestige all
+		reset_mana();
+		power_prestige();
+	}
+
+	let reset_mana;
+	$: {
+		if (typeof reset_mana == "function") reset_mana();
+	}
+	let power_prestige;
+	let click_power_prest = ()=>{
+		power_modal_active = true;
+	}
 </script>
 
 <main>
 
-	<Mana bind:max_buy={max_buy}/>
+	<Mana bind:max_buy={max_buy} bind:reset_mana={reset_mana}/>
 	<div id="border"></div>
-	<Power bind:max_buy={max_buy}/>
+	<Power bind:max_buy={max_buy} bind:do_prestige={power_prestige} bind:click_prestige={click_power_prest}/>
+
+	{#if power_modal_active}
+		<PrestigeModal bind:active={power_modal_active} bind:on_yes={on_yes}/>
+	{/if}
 
 </main>
 

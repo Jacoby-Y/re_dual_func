@@ -49,7 +49,10 @@ export let power = w(0);
 export let ichor = w(0);
 export let unlocked_ichor = w(false);
 export let power_cost = w(1e+3);
-export let power_discount = w(0);
+export let power_discount = w({
+	amount: 0,
+	cost: 2,
+});
 export let cores = w({
 	planet: 0, // Worth 1 ichor
 	realm: 0, // Worth ?

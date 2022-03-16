@@ -6,10 +6,10 @@
 	import { round, floor, sci } from "../functions.js";
 	
 	let cost = 0;
-	$: cost = $power_cost * (1-$discount/100);
+	$: cost = $power_cost * (1-$discount.amount/100);
 
 	const click = ()=>{
-		if ($mana < cost) return;
+		if ($mana <= cost) return;
 		if (max_buy) {
 			let max = floor($mana / cost, 0);
 			$mana -= cost * max;
@@ -63,12 +63,13 @@
 		next_ichor = $cores.planet * 1 + (0); // Other stuffs
 	}
 
-	const do_prestige = ()=>{
+	export const do_prestige = ()=>{
 		prog.update(  v => (v.val = 0, v) );
 		ichor.update( v => v + next_ichor );
 		cores.update( v => (v.planet = 0, v.realm = 0, v.universe = 0, v) );
 		power.set(0);
 	};
+	export let click_prestige;
 	//#endregion 
 	//#region | Ichor Upgrades
 	const upgr1 = ()=>{ // Mana Efficiency
@@ -77,15 +78,15 @@
 		$ichor -= 1;
 	}
 	const upgr2 = ()=>{ // Mana Efficiency
-		if ($ichor < 2) return;
-		$discount += 1;
+		if ($ichor < 2 || $discount.amount >= 99) return;
+		$discount.amount += 1;
 		$ichor -= 2;
 	}
 	//#endregion 
 </script>
 
 <main>
-{#if $mana_prestige.times >= 5 }
+{#if $mana_prestige.times >= 5 || $unlocked_ichor }
 	<h3 id="power">Power: {sci($power)}</h3>
 	<div id="power-bar"> <h3 id="core-info">Planet Cores: {$cores.planet}</h3> <div style="width: {round(bar_perc, 1)}%;"></div> <h3 id="perc">{round(bar_perc, 1)}%</h3> </div>
 
@@ -93,16 +94,16 @@
 
 	<div id="click" on:click={click}><h3 id="max" bind:this={max_text}>Buy Max</h3></div>
 
-	<button id="prestige" on:click={do_prestige}>Prestige ( Turn cores into Ichor ) <b>+{next_ichor} Ichor</b></button>
+	<button id="prestige" on:click={click_prestige}>Prestige ( Turn cores into Ichor ) <b>+{sci(next_ichor)} Ichor</b></button>
 
 	<div id="ichor-hover" style="{ $unlocked_ichor <= 0 ? "display: none;" : "" }"></div>
 	<div id="ichor-menu">
-		<h3 id="ichor-amount">Ichor: {$ichor}</h3>
+		<h3 id="ichor-amount">Ichor: {sci($ichor)}</h3>
 		<button on:click={upgr1}>Mana Efficiency +1% <b>1 Ichor</b></button>
 		<button on:click={upgr2}>Power Cost -1% <b>2 Ichor</b></button>
 	</div>
 
-	{#if $discount > 0} <h3 id="discount-info">Cost Discount: -{$discount}%</h3> {/if}
+	{#if $discount.amount > 0} <h3 id="discount-info">Cost Discount: -{$discount.amount}%</h3> {/if}
 {:else}
 	<div id="lock"></div>
 {/if}
@@ -184,7 +185,7 @@
 		width: 5rem;
 		clip-path: polygon(0 0, 100% 50%, 0 100%);
 	}
-	#click:hover, button:hover { opacity: .85; }
+	#click:hover,  button:hover { opacity: .85; }
 	#click:active, button:active { opacity: .7; }
 	/* Button: #bb86fc */
 	button b {
