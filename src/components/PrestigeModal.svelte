@@ -1,7 +1,7 @@
 <script>
 	export let active = false;
 	export let on_yes;
-
+	
 	const yes = ()=>{
 		active = false;
 		on_yes();
@@ -32,7 +32,8 @@
 		transform: translate(-50%, -50%);
 		height: 35%;
 		width: 50%;
-		background-color: rgb(242, 215, 250); 
+		background-color: #edb1ff; 
+		box-shadow: 0 0 5px 5px #edb1ff;
 
 		padding: 0.5rem;
 		display: grid;

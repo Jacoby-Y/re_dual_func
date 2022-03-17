@@ -3,6 +3,7 @@
 	import Mana from "./components/Mana.svelte";
 	import Power from "./components/Power.svelte";
 	import PrestigeModal from "./components/PrestigeModal.svelte";
+	import Journal from "./components/Journal.svelte";
 
 	import { mana, ichor } from "./stores.js";
 
@@ -26,8 +27,10 @@
 
 	let on_yes = ()=>{
 		// Prestige all
-		reset_mana();
-		power_prestige();
+		if (power_prestige(true) > 0) {
+			power_prestige();
+			reset_mana();
+		}
 	}
 
 	let reset_mana;
@@ -41,15 +44,15 @@
 </script>
 
 <main>
-
 	<Mana bind:max_buy={max_buy} bind:reset_mana={reset_mana}/>
 	<div id="border"></div>
 	<Power bind:max_buy={max_buy} bind:do_prestige={power_prestige} bind:click_prestige={click_power_prest}/>
-
+	
 	{#if power_modal_active}
-		<PrestigeModal bind:active={power_modal_active} bind:on_yes={on_yes}/>
+	<PrestigeModal bind:active={power_modal_active} bind:on_yes={on_yes}/>
 	{/if}
-
+	
+	<Journal />
 </main>
 
 <style>

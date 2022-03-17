@@ -47,13 +47,14 @@
 		bar_perc = Math.log10(Math.max(1, $prog.val)) / Math.log10($prog.max)*100; // Math.min(100, (isFinite(log_prog) ? log_prog : 0)/Math.log10($prog.max));
 		if (bar_perc >= 100) {
 			bar_perc = 100;
-			$prog.val = 0;
+			prog.update(v => (v.val = 0, v.max = round(v.max * 1.15), v));
 			cores.update((v)=> (v.planet++, v));
 		}
 	}
 
 	const power_loop = setInterval(() => {
 		$prog.val += $power / 10;
+		prog.update( v => (v.val += $power / 10, v));
 		$prog = $prog;
 	}, 1000/10);
 	//#endregion
@@ -63,7 +64,10 @@
 		next_ichor = $cores.planet * 1 + (0); // Other stuffs
 	}
 
-	export const do_prestige = ()=>{
+	export const do_prestige = (check_next)=>{
+		if (check_next) 
+			return next_ichor;
+			
 		prog.update(  v => (v.val = 0, v) );
 		ichor.update( v => v + next_ichor );
 		cores.update( v => (v.planet = 0, v.realm = 0, v.universe = 0, v) );
@@ -73,14 +77,14 @@
 	//#endregion 
 	//#region | Ichor Upgrades
 	const upgr1 = ()=>{ // Mana Efficiency
-		if ($ichor < 1) return;
-		$mana_ichor_bonus += 1;
-		$ichor -= 1;
+		if ($ichor < $mana_ichor_bonus.cost) return;
+		mana_ichor_bonus.update( v => (v.amount++, v.cost++, v));
+		$ichor -= $mana_ichor_bonus.cost;
 	}
 	const upgr2 = ()=>{ // Mana Efficiency
-		if ($ichor < 2 || $discount.amount >= 99) return;
-		$discount.amount += 1;
-		$ichor -= 2;
+		if ($ichor < $discount.cost || $discount.amount >= 99) return;
+		discount.update( v => (v.amount++, v.cost += 2, v));
+		$ichor -= $discount.cost;
 	}
 	//#endregion 
 </script>
@@ -99,8 +103,8 @@
 	<div id="ichor-hover" style="{ $unlocked_ichor <= 0 ? "display: none;" : "" }"></div>
 	<div id="ichor-menu">
 		<h3 id="ichor-amount">Ichor: {sci($ichor)}</h3>
-		<button on:click={upgr1}>Mana Efficiency +1% <b>1 Ichor</b></button>
-		<button on:click={upgr2}>Power Cost -1% <b>2 Ichor</b></button>
+		<button on:click={upgr1}>Mana Efficiency +1% <b>{$mana_ichor_bonus.cost} Ichor</b></button>
+		<button on:click={upgr2}>Power Cost -1% <b>{$discount.cost} Ichor</b></button>
 	</div>
 
 	{#if $discount.amount > 0} <h3 id="discount-info">Cost Discount: -{$discount.amount}%</h3> {/if}

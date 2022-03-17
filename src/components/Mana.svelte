@@ -1,12 +1,13 @@
 <script>
 	export let max_buy;
 
-	import { mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige, mana_ichor_bonus } from "../stores.js";
+	import { max_entry, mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige, mana_ichor_bonus } from "../stores.js";
 	import { sci, fix_big_num } from "../functions";
 
 	//#region | Per Click
 	const click = ()=> { $mana += get_per_click; get_combo() };
 	const per_click_buy = ()=>{
+		if ($max_entry == 0) $max_entry = 1;
 		if ($mana < $per_click.cost) return;
 		$mana -= $per_click.cost;
 		$per_click.cost = Math.ceil($per_click.cost * 1.15);
@@ -48,6 +49,7 @@
 		$mana += get_per_sec/5;
 	}, 200);
 	const idle_buy = ()=>{
+		if ($max_entry == 1) $max_entry = 2;
 		if ($mana < $idle.cost) return;
 		$mana -= $idle.cost;
 		$idle.cost = Math.ceil($idle.cost * 1.15);
@@ -60,13 +62,14 @@
 
 	//#region | Bonus
 	let get_bonus = 0;
-	$: get_bonus = ((($bonus.val <= 0 ? 1 : 1 + $bonus.val) * (1 + (Math.min(combo_perc, 100) * $combo.val)/100)) * (1 + $prestige.times * 0.5)) * (1 + $mana_ichor_bonus/100);
+	$: get_bonus = ((($bonus.val <= 0 ? 1 : 1 + $bonus.val) * (1 + (Math.min(combo_perc, 100) * $combo.val)/100)) * (1 + $prestige.times * 0.5)) * (1 + $mana_ichor_bonus.amount/100);
 	// $: console.log(get_bonus);
 	// p1 * p2 * p3 | bonus * combo * prestige
 	// $: console.log(`1 + (${$bonus.val <= 0 ? 1 : $bonus.val} * ${1 + (Math.min(combo_perc, 100) * $combo.val)/100}) * ${1 + $prestige.times * 0.5}`)
 	// $: console.log(`Total bonus: ${get_bonus}, bonus.val: ${$bonus.val}, combo_perc: ${combo_perc}, combo.val: ${$combo.val}, prestige.times: ${$prestige.times}`);
 	// $: get_bonus = 1 + $bonus.val;
 	const bonus_buy = ()=>{
+		// if ($max_entry == 2) $max_entry = 3;
 		if ($mana < $bonus.cost) return;
 		$mana -= $bonus.cost;
 		$bonus.cost = Math.ceil($bonus.cost * 1.25);
@@ -201,7 +204,7 @@
 		{#if $bonus.val > 0} {sci(($bonus.val)*100)}% Bonus Bonus<br>{/if}
 		{#if $combo.unlocked} * {sci(Math.min(combo_perc, 100)*$combo.val)}% Combo (+{$combo.val}%/Click)<br> {/if}
 		{#if $prestige.times > 0} * {sci(($prestige.times*0.5)*100)}% Prestige Bonus<br>{/if}
-		{#if $mana_ichor_bonus > 0} * {sci($mana_ichor_bonus)}% Ichor Bonus<br>{/if}
+		{#if $mana_ichor_bonus.amount > 0} * {sci($mana_ichor_bonus.amount)}% Ichor Bonus<br>{/if}
 	</h3>
 
 	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds}s | Best: {isFinite($prestige.fastest)? $prestige.fastest+'s' : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}

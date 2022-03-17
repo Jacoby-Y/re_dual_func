@@ -59,8 +59,13 @@ export let cores = w({
 	universe: 0, // Worth ?
 	
 });
-export let mana_ichor_bonus = w(0);
+export let mana_ichor_bonus = w({
+	amount: 0,
+	cost: 1,
+});
 //#endregion
+
+export const max_entry = w(0);
 
 //#region | Post-Setup
 window.onbeforeunload = ()=>{

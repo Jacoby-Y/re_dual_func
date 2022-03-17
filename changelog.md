@@ -1,3 +1,8 @@
+## v0.5
+- Added wizard journal entry
+- Styled up power prestige modal
+- Quality of life for power prestige
+
 ## v0.4.3
 - Added prestige modal for power prestige
 - Power prestige now resets mana too
