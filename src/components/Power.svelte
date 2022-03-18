@@ -1,7 +1,7 @@
 <script>
 	import { 
-		mana, mana_prestige, mana_ichor_bonus,
-		power_progress as prog, power, power_cost, power_discount as discount, cores, ichor, unlocked_ichor
+		mana, mana_prestige, mana_ichor_bonus, max_entry,
+		power_progress as prog, power, power_cost, power_discount as discount, planet_cores as cores, realms, ichor, unlocked_ichor
 	} from "../stores.js";
 	import { round, floor, sci } from "../functions.js";
 	
@@ -47,8 +47,8 @@
 		bar_perc = Math.log10(Math.max(1, $prog.val)) / Math.log10($prog.max)*100; // Math.min(100, (isFinite(log_prog) ? log_prog : 0)/Math.log10($prog.max));
 		if (bar_perc >= 100) {
 			bar_perc = 100;
-			prog.update(v => (v.val = 0, v.max = round(v.max * 1.15), v));
-			cores.update((v)=> (v.planet++, v));
+			prog.update(v => (v.val = 0, v.max = round(v.max * 1.1), v));
+			$cores++;
 		}
 	}
 
@@ -61,16 +61,16 @@
 	//#region | Prestige Stuff
 	let next_ichor = 0;
 	$: {
-		next_ichor = $cores.planet * 1 + (0); // Other stuffs
+		next_ichor = $cores * 1 + (0); // Other stuffs
 	}
 
 	export const do_prestige = (check_next)=>{
 		if (check_next) 
 			return next_ichor;
-			
+		if ($max_entry == 5) $max_entry = 6;
 		prog.update(  v => (v.val = 0, v) );
 		ichor.update( v => v + next_ichor );
-		cores.update( v => (v.planet = 0, v.realm = 0, v.universe = 0, v) );
+		cores.set(0);
 		power.set(0);
 	};
 	export let click_prestige;
@@ -78,21 +78,30 @@
 	//#region | Ichor Upgrades
 	const upgr1 = ()=>{ // Mana Efficiency
 		if ($ichor < $mana_ichor_bonus.cost) return;
-		mana_ichor_bonus.update( v => (v.amount++, v.cost++, v));
 		$ichor -= $mana_ichor_bonus.cost;
+		mana_ichor_bonus.update( v => (v.amount++, v.cost++, v));
+		if (max_buy) upgr1();
 	}
 	const upgr2 = ()=>{ // Mana Efficiency
 		if ($ichor < $discount.cost || $discount.amount >= 99) return;
-		discount.update( v => (v.amount++, v.cost += 2, v));
 		$ichor -= $discount.cost;
+		discount.update( v => (v.amount++, v.cost += 2, v));
+		if (max_buy) upgr2();
 	}
 	//#endregion 
+	//#region | Realm Creation
+	const create_realm = ()=>{
+		if ($cores < 100) return;
+		$cores -= 100;
+		$realms++;
+	}
+	//#endregion
 </script>
 
 <main>
 {#if $mana_prestige.times >= 5 || $unlocked_ichor }
 	<h3 id="power">Power: {sci($power)}</h3>
-	<div id="power-bar"> <h3 id="core-info">Planet Cores: {$cores.planet}</h3> <div style="width: {round(bar_perc, 1)}%;"></div> <h3 id="perc">{round(bar_perc, 1)}%</h3> </div>
+	<div id="power-bar"> <h3 id="core-info">Planet Cores: {$cores}</h3> <div style="width: {round(bar_perc, 1)}%;"></div> <h3 id="perc">{round(bar_perc, 1)}%</h3> </div>
 
 	<h3 id="power-cost">{sci(cost)} Mana -> 1 Power</h3>
 
@@ -100,11 +109,14 @@
 
 	<button id="prestige" on:click={click_prestige}>Prestige ( Turn cores into Ichor ) <b>+{sci(next_ichor)} Ichor</b></button>
 
+	<!-- <button id="make-realm" on:click={create_realm}><b>Create a Realm for 100 Planet Cores</b><br>(Idle Ichor production)</button> -->
+
 	<div id="ichor-hover" style="{ $unlocked_ichor <= 0 ? "display: none;" : "" }"></div>
 	<div id="ichor-menu">
 		<h3 id="ichor-amount">Ichor: {sci($ichor)}</h3>
 		<button on:click={upgr1}>Mana Efficiency +1% <b>{$mana_ichor_bonus.cost} Ichor</b></button>
-		<button on:click={upgr2}>Power Cost -1% <b>{$discount.cost} Ichor</b></button>
+		<button on:click={upgr2}>Power Cost -1% <b>{ $discount.amount < 99 ? $discount.cost + " Ichor" : "Max"}</b></button>
+		<!-- <button on:click={()=>{}}>Buy The 9th God's seat <b>{100} Ichor</b></button> -->
 	</div>
 
 	{#if $discount.amount > 0} <h3 id="discount-info">Cost Discount: -{$discount.amount}%</h3> {/if}
@@ -231,7 +243,7 @@
 		padding: 0.5rem;
 		border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;
 		border-left: 2px solid #ece036; border-top: 2px solid #f5ea54; border-bottom: 2px solid #d4ca39; 
-		width: 50%;
+		width: 60%;
 		display: grid;
 		transition-duration: 0.3s;
 		gap: 0.5rem;
@@ -255,5 +267,18 @@
 		bottom: 3.2rem;
 		color: #cca2ff;
 		font-weight: normal;
+	}
+
+	#make-realm {
+		position: absolute;
+		top: 30%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: max-content;
+		background-color: #c596ff;
+		/* font-weight: bold; */
+		padding: 0.5rem 0.7rem;
+		/* border: 2px solid #9c6fd3; */
+		border: none;
 	}
 </style>

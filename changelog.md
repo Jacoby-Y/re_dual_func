@@ -1,3 +1,10 @@
+## v0.5.1
+- Balancing changes
+- More functionality to wizard journal
+- Quality of life additions
+- Added button for creating a realm. (not functional)
+- More debugging features!
+
 ## v0.5
 - Added wizard journal entry
 - Styled up power prestige modal

@@ -11,15 +11,16 @@
 
 	document.body.onkeyup = (e)=> { 
 		const k = e.key;
-		; k == "m" ? $mana += 1e+6 
+		; k == "m" ? $mana += 1e+7 
 		: k == "Shift" ? max_buy = false
-		: k == "i" ? $ichor++
+		: k == "i" ? $ichor += 10
 		: 0;
 	}
 	document.body.onkeydown = (e)=> { 
 		const k = e.key;
-		; k == "m" ? $mana += 1e+6
+		; k == "m" ? $mana += 1e+7
 		: k == "Shift" ? max_buy = true
+		: k == "i" ? $ichor += 10
 		: 0;
 	}
 
@@ -34,9 +35,6 @@
 	}
 
 	let reset_mana;
-	$: {
-		if (typeof reset_mana == "function") reset_mana();
-	}
 	let power_prestige;
 	let click_power_prest = ()=>{
 		power_modal_active = true;

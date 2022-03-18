@@ -1,18 +1,21 @@
 <script>
-	export let max_buy;
+	export let max_buy; 
 
 	import { max_entry, mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige, mana_ichor_bonus } from "../stores.js";
 	import { sci, fix_big_num } from "../functions";
 
 	//#region | Per Click
+
+	// $: console.log($per_click);
+
 	const click = ()=> { $mana += get_per_click; get_combo() };
 	const per_click_buy = ()=>{
-		if ($max_entry == 0) $max_entry = 1;
 		if ($mana < $per_click.cost) return;
 		$mana -= $per_click.cost;
-		$per_click.cost = Math.ceil($per_click.cost * 1.15);
-		$per_click.val++;
-		$per_click = $per_click;
+		per_click.update( v => (
+			v.val++, 
+			v.cost = Math.ceil(v.cost * 1.15), 
+		v));
 
 		if (max_buy) per_click_buy();
 	}
@@ -49,10 +52,10 @@
 		$mana += get_per_sec/5;
 	}, 200);
 	const idle_buy = ()=>{
-		if ($max_entry == 1) $max_entry = 2;
 		if ($mana < $idle.cost) return;
+		if ($max_entry == 0) $max_entry = 1;
 		$mana -= $idle.cost;
-		$idle.cost = Math.ceil($idle.cost * 1.15);
+		$idle.cost = Math.ceil($idle.cost * 1.10);
 		$idle.val += 5;
 		$idle = $idle;
 
@@ -69,8 +72,8 @@
 	// $: console.log(`Total bonus: ${get_bonus}, bonus.val: ${$bonus.val}, combo_perc: ${combo_perc}, combo.val: ${$combo.val}, prestige.times: ${$prestige.times}`);
 	// $: get_bonus = 1 + $bonus.val;
 	const bonus_buy = ()=>{
-		// if ($max_entry == 2) $max_entry = 3;
 		if ($mana < $bonus.cost) return;
+		if ($max_entry == 1) $max_entry = 2;
 		$mana -= $bonus.cost;
 		$bonus.cost = Math.ceil($bonus.cost * 1.25);
 		$bonus.val += 0.25;
@@ -95,6 +98,7 @@
 
 	const combo_unlock = ()=>{
 		if ($mana < $combo.unlock) return;
+		if ($max_entry == 2) $max_entry = 3;
 		$mana -= $combo.unlock;
 		$combo.unlocked = true;
 		$combo.val = 1;
@@ -112,6 +116,11 @@
 	//#endregion
 
 	//#region | Prestige
+
+	$: {
+		if ($prestige.times == 5 && $max_entry == 4) $max_entry = 5;
+		// console.log(`prest.times: ${$prestige.times}, max_entry: ${$max_entry}`);
+	}
 	
 	const prest_loop = setInterval(() => {
 		$prestige.seconds++;
@@ -119,7 +128,7 @@
 
 	export const reset_mana = ()=>{
 		$mana = 0;
-		per_click.update(v => (v.cost = 25, v.val = 1, v));
+		per_click.update(v => (v.cost = 50, v.val = 1, v));
 		idle.update(v => (v.cost = 100, v.val = 0, v));
 		bonus.update(v => (v.cost = 1000, v.val = 0, v));
 		combo.update(v => (v.cost = 1000, v.val = 0, v.unlocked = false, v.unlock = 7500, v));
@@ -129,8 +138,9 @@
 
 	const do_prestige = ()=>{
 		if ($mana < $prestige.cost) return;
+		if ($max_entry == 3) $max_entry = 4;
 		$mana = 0; //2e+6; //-! DEBUG VALUE
-		$per_click.cost = 25;
+		$per_click.cost = 50;
 		$per_click.val = 1;
 		$idle.cost = 100;
 		$idle.val = 0;

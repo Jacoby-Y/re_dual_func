@@ -8,7 +8,6 @@ ToDo List:
 - fix wizard journal entries
 
 ToDo Limbo:
-- max buy ichor upgrades
 - menu for cores (maybe toggle between which type of core you want to grind for?)
 
 With enough planet cores you can create a realm and idley gain ichor

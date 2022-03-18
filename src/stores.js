@@ -15,7 +15,7 @@ const to_store = {};
 //#region | Mana Stuffs
 export let mana = w(0); //w(1e+8); //-! DEBUG VALUE | 
 export let mana_click = w({
-	cost: 25,
+	cost: 50,
 	val: 1,
 });
 export let mana_idle = w({
@@ -46,19 +46,15 @@ export let power_progress = w({
 	val: 0,
 });
 export let power = w(0);
-export let ichor = w(0);
+export let ichor = w(100000);
 export let unlocked_ichor = w(false);
 export let power_cost = w(1e+3);
 export let power_discount = w({
 	amount: 0,
 	cost: 2,
 });
-export let cores = w({
-	planet: 0, // Worth 1 ichor
-	realm: 0, // Worth ?
-	universe: 0, // Worth ?
-	
-});
+export let planet_cores = w(0);
+export let realms = w(0);
 export let mana_ichor_bonus = w({
 	amount: 0,
 	cost: 1,
