@@ -1,3 +1,8 @@
+## v0.6.2
+- Bug fixes
+- Quality of life
+- Fixed some journal text
+
 ## v0.6.1 [Hot Fix]
 - Forgot to add version to index.html title
 

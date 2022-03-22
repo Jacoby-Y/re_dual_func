@@ -10,7 +10,7 @@
 		/* 6 */ `I talked to the Gods. They gave me Ichor for the cores of the ruined planets I take over, but at a multi-universal cost.`,
 		/* 7 */ `I did it! I've created my own realm. Now there can finally be a realm where politics aren't corrupt and pizza doesn't make you fat!`,
 		/* 8 */ `Hey, Dad, guess where I am. Yep, you guessed it (probably). I'm at the counsel of The 9 Gods! I bought one of their seats (these guys are easy to bribe). You don't need to worry about bad harvests anymore!`,
-		/* 9 */ `What is a universe to a man who's experienced everything. What is a life to a man that doesn't know what it means to live anymore? I can't start over, I can't prestige, I can't live, I can't die. To create, to destroy. To create destruction. Goodbye, Dad, I love you.`
+		/* 9 */ `What is a universe to a man who's experienced everything. What is a life to a man that doesn't know what it means to live anymore? I can't start over; I can't prestige, I can't live; I can't die. To create; to destroy. To create destruction. Goodbye, Dad, I love you.`
 	];
 	let out = false;
 </script>

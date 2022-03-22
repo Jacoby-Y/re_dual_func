@@ -40,7 +40,7 @@ export let mana_prestige = w("mana_prestige", {
 	cost: 1e+6,
 	times: 0,
 	seconds: 0,
-	fastest: Infinity,
+	fastest: -1,
 });
 //#endregion
 

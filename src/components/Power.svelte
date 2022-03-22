@@ -49,7 +49,7 @@
 		bar_perc = Math.log10(Math.max(1, $prog.val)) / Math.log10($prog.max)*100; // Math.min(100, (isFinite(log_prog) ? log_prog : 0)/Math.log10($prog.max));
 		if (bar_perc >= 100) {
 			bar_perc = 100;
-			prog.update(v => (v.val = 0, v.max = round(v.max * 1.1), v));
+			prog.update(v => (v.val -= v.max, v.max = round(v.max * 1.1), v));
 			$cores++;
 		}
 	}
@@ -70,7 +70,7 @@
 		if (check_next) 
 			return next_ichor;
 		if ($max_entry == 5) $max_entry = 6;
-		prog.update(  v => (v.val = 0, v) );
+		prog.update(  v => (v.val = 0, v.max = 1e5, v) );
 		ichor.update( v => v + next_ichor );
 		cores.set(0);
 		power.set(0);
@@ -93,9 +93,9 @@
 	//#endregion 
 	//#region | Realm Creation
 	const create_realm = ()=>{
-		if ($cores < 100) return;
+		if ($cores < 50) return;
 		if ($max_entry == 6) $max_entry = 7;
-		$cores -= 100;
+		$cores -= 50;
 		$realms++;
 	}
 	setInterval(() => ($realms > 0 ? $ichor += $realms : undefined), 1000);
@@ -143,7 +143,10 @@
 		<h3 id="end-game-info">You beat the game in {format_seconds($ended_time - $started_time, false)}.<br>Do "Shift + R" to restart</h3>
 	{/if}
 
-	{#if $unlocked_ichor}<button id="make-realm" on:click={create_realm}><b>Create a Realm for 100 Planet Cores</b><br>(Idle Ichor production)</button>{/if}
+	{#if $unlocked_ichor}<button id="make-realm" on:click={create_realm}>
+		<b>Create a Realm for 50 Planet Cores</b>
+		{#if $realms <= 0}<br>(Idle Ichor production){/if}
+	</button>{/if}
 	{#if $realms > 0}<h3 id="idle-ichor">+{$realms} Ichor/Sec</h3>{/if}
 	<div id="ichor-hover" style="{ $unlocked_ichor <= 0 ? "display: none;" : "" }"></div>
 	<div id="ichor-menu">

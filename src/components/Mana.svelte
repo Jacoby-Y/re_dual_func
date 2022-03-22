@@ -127,8 +127,13 @@
 		bonus.update(v => (v.cost = 1000, v.val = 0, v));
 		combo.update(v => (v.cost = 1000, v.val = 0, v.unlocked = false, v.unlock = 7500, v));
 		prestige.update(v => (v.cost = 1e+6, v.times = 0, v));
-
+		combo_perc = 0;
 	}
+
+	let fastest_prest;
+	$: fastest_prest = $prestige.fastest < 0 ? "N/A" : format_seconds($prestige.fastest);
+
+	// $: console.log($prestige);
 
 	const do_prestige = ()=>{
 		if ($mana < $prestige.cost) return;
@@ -149,7 +154,7 @@
 		$prestige.cost *= 1.2;
 		$prestige.cost = fix_big_num($prestige.cost, 1);
 
-		if ($prestige.seconds < $prestige.fastest) $prestige.fastest = $prestige.seconds;
+		if ($prestige.seconds < $prestige.fastest || $prestige.fastest < 0) $prestige.fastest = $prestige.seconds;
 		$prestige.seconds = 0;
 
 		// console.log(`mana: ${$mana}, prest cost: ${$prestige.cost}`);
@@ -211,7 +216,7 @@
 		{#if $mana_ichor_bonus.amount > 0} * {sci($mana_ichor_bonus.amount)}% Ichor Bonus<br>{/if}
 	</h3>
 
-	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {format_seconds($prestige.seconds)} | Best: {isFinite($prestige.fastest)? format_seconds($prestige.fastest) : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}
+	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {format_seconds($prestige.seconds)} | {fastest_prest} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}
 
 	<div on:click={click} id="click"> <h3 id="max" bind:this={max_text}>Buy Max</h3> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 

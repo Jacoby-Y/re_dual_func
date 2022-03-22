@@ -5,6 +5,9 @@
 	import Journal from "./components/Journal.svelte";
 
 	import { mana, mana_click, mana_idle, mana_bonus, mana_combo, mana_prestige, power_progress, power, ichor, unlocked_ichor, power_cost, power_discount, planet_cores, realms, mana_ichor_bonus, gods, max_entry, started_time, ended_time, offline } from "./stores.js";
+	
+	$: window.power_progress = $power_progress;
+
 	window.onbeforeunload = ()=>{
 		localStorage["mana"] = JSON.stringify($mana);
 		localStorage["mana_click"] = JSON.stringify($mana_click); 
@@ -32,7 +35,7 @@
 	$mana_prestige.seconds += total_offline;
 	if ($mana_idle > 0) $mana += $mana_idle * total_offline;
 	if ($realms > 0) $ichor += $realms * total_offline;
-	// if ($power > 0) 
+	if ($power > 0) $power_progress.val += $power * total_offline;
 
 	let max_buy = false;
 
