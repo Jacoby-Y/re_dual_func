@@ -2,7 +2,7 @@
 	export let max_buy; 
 
 	import { max_entry, mana, mana_click as per_click, mana_idle as idle, mana_bonus as bonus, mana_combo as combo, mana_prestige as prestige, mana_ichor_bonus } from "../stores.js";
-	import { sci, fix_big_num } from "../functions";
+	import { sci, fix_big_num, format_seconds } from "../functions";
 
 	//#region | Per Click
 
@@ -116,12 +116,6 @@
 	//#endregion
 
 	//#region | Prestige
-
-	$: {
-		if ($prestige.times == 5 && $max_entry == 4) $max_entry = 5;
-		// console.log(`prest.times: ${$prestige.times}, max_entry: ${$max_entry}`);
-	}
-	
 	const prest_loop = setInterval(() => {
 		$prestige.seconds++;
 	}, 1000);
@@ -217,7 +211,7 @@
 		{#if $mana_ichor_bonus.amount > 0} * {sci($mana_ichor_bonus.amount)}% Ichor Bonus<br>{/if}
 	</h3>
 
-	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {$prestige.seconds}s | Best: {isFinite($prestige.fastest)? $prestige.fastest+'s' : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}
+	{#if $prestige.times > 0 || $combo.unlocked} <button id="prestige" on:click={do_prestige}>Prestige ( {format_seconds($prestige.seconds)} | Best: {isFinite($prestige.fastest)? format_seconds($prestige.fastest) : "N/A"} ) <b>{sci($prestige.cost)} Mana</b></button> {/if}
 
 	<div on:click={click} id="click"> <h3 id="max" bind:this={max_text}>Buy Max</h3> <div id="combo" style="height: {Math.min(combo_perc, 100)}%;"></div> </div>
 

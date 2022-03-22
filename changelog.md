@@ -1,3 +1,10 @@
+## v0.6 [Beta 1]
+- Added link to my "Buy Me a Coffee"
+- Finalized journal
+- Added debug mode
+- Added local storage
+- Added offline progress system
+
 ## v0.5.1
 - Balancing changes
 - More functionality to wizard journal

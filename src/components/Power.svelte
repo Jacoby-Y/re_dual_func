@@ -1,15 +1,17 @@
 <script>
 	import { 
 		mana, mana_prestige, mana_ichor_bonus, max_entry,
-		power_progress as prog, power, power_cost, power_discount as discount, planet_cores as cores, realms, ichor, unlocked_ichor
+		gods, power_progress as prog, power, power_cost, power_discount as discount, planet_cores as cores, realms, ichor, unlocked_ichor,
+		ended_time, started_time
 	} from "../stores.js";
-	import { round, floor, sci } from "../functions.js";
+	import { round, floor, sci, format_seconds } from "../functions.js";
 	
 	let cost = 0;
 	$: cost = $power_cost * (1-$discount.amount/100);
 
 	const click = ()=>{
 		if ($mana <= cost) return;
+		if ($max_entry == 4) $max_entry = 5;
 		if (max_buy) {
 			let max = floor($mana / cost, 0);
 			$mana -= cost * max;
@@ -92,9 +94,36 @@
 	//#region | Realm Creation
 	const create_realm = ()=>{
 		if ($cores < 100) return;
+		if ($max_entry == 6) $max_entry = 7;
 		$cores -= 100;
 		$realms++;
 	}
+	setInterval(() => ($realms > 0 ? $ichor += $realms : undefined), 1000);
+	//#endregion
+	//#region | The 9 Gods
+	const nth_place = {
+		1: 'Final',
+		2: '2nd',
+		3: '3rd',
+		4: '4th',
+		5: '5th',
+		6: '6th',
+		7: '7th',
+		8: '8th',
+		9: '9th',
+	};
+	const buy_god = ()=>{
+		if ($gods.bought >= 9) return;
+		if ($ichor < $gods.cost) return;
+		$max_entry = 8;
+		$ichor -= $gods.cost;
+		gods.update(v => (v.cost *= 2, v.bought++, v));
+		if ($gods.bought >= 9) {
+			$max_entry = 9;
+			$ended_time = round(Date.now()/1000, 0);
+		}
+	}
+
 	//#endregion
 </script>
 
@@ -109,14 +138,25 @@
 
 	<button id="prestige" on:click={click_prestige}>Prestige ( Turn cores into Ichor ) <b>+{sci(next_ichor)} Ichor</b></button>
 
-	<!-- <button id="make-realm" on:click={create_realm}><b>Create a Realm for 100 Planet Cores</b><br>(Idle Ichor production)</button> -->
+	<!-- Win Game Info -->
+	{#if $gods.bought >= 9}
+		<h3 id="end-game-info">You beat the game in {format_seconds($ended_time - $started_time, false)}.<br>Do "Shift + R" to restart</h3>
+	{/if}
 
+	{#if $unlocked_ichor}<button id="make-realm" on:click={create_realm}><b>Create a Realm for 100 Planet Cores</b><br>(Idle Ichor production)</button>{/if}
+	{#if $realms > 0}<h3 id="idle-ichor">+{$realms} Ichor/Sec</h3>{/if}
 	<div id="ichor-hover" style="{ $unlocked_ichor <= 0 ? "display: none;" : "" }"></div>
 	<div id="ichor-menu">
 		<h3 id="ichor-amount">Ichor: {sci($ichor)}</h3>
 		<button on:click={upgr1}>Mana Efficiency +1% <b>{$mana_ichor_bonus.cost} Ichor</b></button>
-		<button on:click={upgr2}>Power Cost -1% <b>{ $discount.amount < 99 ? $discount.cost + " Ichor" : "Max"}</b></button>
-		<!-- <button on:click={()=>{}}>Buy The 9th God's seat <b>{100} Ichor</b></button> -->
+		<button on:click={upgr2}>Power Cost -1% <b>{$discount.amount < 99 ? $discount.cost + " Ichor" : "Max"}</b></button>
+		<button on:click={buy_god}>
+			{#if $gods.bought < 9}
+				Buy The {nth_place[9-$gods.bought]} God's seat <b>{sci($gods.cost)} Ichor</b>
+			{:else}
+				You own the universe!
+			{/if}
+		</button>
 	</div>
 
 	{#if $discount.amount > 0} <h3 id="discount-info">Cost Discount: -{$discount.amount}%</h3> {/if}
@@ -280,5 +320,22 @@
 		padding: 0.5rem 0.7rem;
 		/* border: 2px solid #9c6fd3; */
 		border: none;
+	}
+	#idle-ichor {
+		position: absolute;
+		right: 1rem;
+		bottom: 3.2rem;
+		color: #cca2ff;
+	}
+
+	#end-game-info {
+		position: absolute;
+		bottom: 30%;
+		left: 50%;
+		transform: translate(-50%, 50%);
+		color: #cca2ff;
+		text-align: center;
+		font-weight: normal;
+		width: max-content;
 	}
 </style>

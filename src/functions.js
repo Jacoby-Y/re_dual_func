@@ -13,3 +13,16 @@ export const fix_big_num = (num, place)=>{
   const l = Math.floor(Math.log10(num));
   return Math.round(num / ((10**l)/(10**place)))*((10**l)/(10**place));
 }
+export const format_seconds = (secs, short=true)=>{
+  let neg = secs < 0;
+  if (neg) secs = Math.abs(secs);
+  if (secs < 60) return `${neg ? '-' : ''}${round(secs, 0)}${short ? "s" : " Seconds"}`;
+  secs /= 60;
+  if (secs < 60) return `${neg ? '-' : ''}${round(secs)}${short ? "m" : " Minutes"}`;
+  secs /= 60;
+  if (secs < 60) return `${neg ? '-' : ''}${round(secs)}${short ? "h" : " Hours"}`;
+  secs /= 24;
+  if (secs < 24) return `${neg ? '-' : ''}${round(secs)}${short ? "d" : " Days"}`;
+  secs /= 365;
+  return `${neg ? '-' : ''}${round(secs)}${short ? "y" : " Years"}`;
+}
