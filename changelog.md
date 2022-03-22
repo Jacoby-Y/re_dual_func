@@ -1,3 +1,6 @@
+## v0.6.1 [Hot Fix]
+- Forgot to add version to index.html title
+
 ## v0.6 [Beta 1]
 - Added link to my "Buy Me a Coffee"
 - Finalized journal
