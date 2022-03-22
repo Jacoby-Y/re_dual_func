@@ -1,3 +1,6 @@
+## v0.6.3
+- Can max buy relams now
+
 ## v0.6.2
 - Bug fixes
 - Quality of life

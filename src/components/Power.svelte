@@ -97,6 +97,7 @@
 		if ($max_entry == 6) $max_entry = 7;
 		$cores -= 50;
 		$realms++;
+		if (max_buy) create_realm();
 	}
 	setInterval(() => ($realms > 0 ? $ichor += $realms : undefined), 1000);
 	//#endregion
