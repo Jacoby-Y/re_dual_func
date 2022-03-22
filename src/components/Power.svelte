@@ -165,7 +165,9 @@
 
 	{#if $discount.amount > 0} <h3 id="discount-info">Cost Discount: -{$discount.amount}%</h3> {/if}
 {:else}
-	<div id="lock"></div>
+	<div id="lock">
+		<h3 id="prest-info">Prestige {5 - $mana_prestige.times} more times</h3>
+	</div>
 {/if}
 </main>
 
@@ -177,13 +179,24 @@
 		grid-auto-rows: max-content;
 		gap: 1rem;
 	}
+
 	#lock {
 		background-image: url("../assets/lock.svg");
 		position: absolute;
-		left: 50%; top: 50%;
+		left: 50%; top: calc(50% - 0.5rem);
 		transform: translate(-50%, -50%);
 		width: 5rem; height: 5rem;
 	}
+	#prest-info {
+		position: absolute;
+		left: 50%;
+		top: 100%;
+		transform: translate(-50%, 0);
+		width: max-content;
+		color: #cca2ff;
+		padding: 0.5rem 0.7rem;
+	}
+
 	#power {
 		color: #cca2ff;
 		padding: 0.5rem 0.7rem;

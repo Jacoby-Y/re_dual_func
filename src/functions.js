@@ -18,11 +18,11 @@ export const format_seconds = (secs, short=true)=>{
   if (neg) secs = Math.abs(secs);
   if (secs < 60) return `${neg ? '-' : ''}${round(secs, 0)}${short ? "s" : " Seconds"}`;
   secs /= 60;
-  if (secs < 60) return `${neg ? '-' : ''}${round(secs)}${short ? "m" : " Minutes"}`;
+  if (secs < 60) return `${neg ? '-' : ''}${ceil(secs)}${short ? "m" : " Minutes"}`;
   secs /= 60;
-  if (secs < 60) return `${neg ? '-' : ''}${round(secs)}${short ? "h" : " Hours"}`;
+  if (secs < 60) return `${neg ? '-' : ''}${ceil(secs)}${short ? "h" : " Hours"}`;
   secs /= 24;
-  if (secs < 24) return `${neg ? '-' : ''}${round(secs)}${short ? "d" : " Days"}`;
+  if (secs < 24) return `${neg ? '-' : ''}${ceil(secs)}${short ? "d" : " Days"}`;
   secs /= 365;
-  return `${neg ? '-' : ''}${round(secs)}${short ? "y" : " Years"}`;
+  return `${neg ? '-' : ''}${ceil(secs)}${short ? "y" : " Years"}`;
 }

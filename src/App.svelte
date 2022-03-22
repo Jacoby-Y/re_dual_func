@@ -6,7 +6,7 @@
 
 	import { mana, mana_click, mana_idle, mana_bonus, mana_combo, mana_prestige, power_progress, power, ichor, unlocked_ichor, power_cost, power_discount, planet_cores, realms, mana_ichor_bonus, gods, max_entry, started_time, ended_time, offline } from "./stores.js";
 	
-	$: window.power_progress = $power_progress;
+	$: window.power_progress = power_progress;
 
 	window.onbeforeunload = ()=>{
 		localStorage["mana"] = JSON.stringify($mana);
